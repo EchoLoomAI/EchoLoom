@@ -437,26 +437,30 @@
                     <div class="flex items-center gap-4 pl-6 border-l border-white/20">
                         <!-- Download Dropdown -->
                         <div class="relative group">
+                            <!-- Added invisible bridge to prevent hover loss -->
+                            <div class="absolute top-full left-0 w-full h-4 bg-transparent"></div>
+
                             <button
                                 class="px-5 py-2 bg-teal-600 hover:bg-teal-700 text-white rounded-full transition-all duration-300 flex items-center gap-2 shadow-lg shadow-teal-900/20 font-bold">
                                 <i class="fa-solid fa-download"></i> 下载 App
                             </button>
                             <div
-                                class="absolute top-full right-0 mt-3 w-56 bg-white rounded-xl shadow-2xl border border-slate-100 overflow-hidden hidden group-hover:block transition-all transform origin-top-right z-50">
-                                <a href="https://median.co/share/lpzkblr#apk" target="_blank"
+                                class="absolute top-[calc(100%+10px)] right-0 w-64 bg-white rounded-xl shadow-2xl border border-slate-100 overflow-hidden invisible group-hover:visible opacity-0 group-hover:opacity-100 transition-all duration-200 transform origin-top-right z-50">
+                                <a href="https://gonativeio-apps.s3.us-east-1.amazonaws.com/static/69a7ae08763c97dd4a840dd0/app-release.apk?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Credential=AKIAYMYFO3A75OQPINCL%2F20260310%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20260310T085122Z&X-Amz-Expires=600&X-Amz-Signature=1fefb8724b431bda3eb90b7209896f7184cdaa4c0f418a917f5c527c8eb40a0c&X-Amz-SignedHeaders=host&versionId=7DgBws3MSmlp06N.YRU98lTm1vhWkfqC&x-amz-checksum-mode=ENABLED&x-id=GetObject"
+                                    target="_blank"
                                     class="block px-5 py-4 text-sm text-slate-700 hover:bg-teal-50 hover:text-teal-700 flex items-center gap-3 transition-colors border-b border-slate-50">
-                                    <i class="fa-brands fa-android text-green-500 text-xl"></i>
+                                    <i class="fa-brands fa-android text-green-500 text-2xl"></i>
                                     <div class="flex flex-col text-left">
-                                        <span class="font-bold">Android 下载</span>
-                                        <span class="text-xs text-slate-400 font-normal">v1.0.2 (最新版)</span>
+                                        <span class="font-bold text-base">Android 下载</span>
+                                        <span class="text-xs text-slate-400 font-normal mt-0.5">v1.0.2 (最新版)</span>
                                     </div>
                                 </a>
                                 <a href="#" onclick="alert('iOS 版本正在审核中，敬请期待！'); return false;"
                                     class="block px-5 py-4 text-sm text-slate-400 hover:bg-slate-50 cursor-not-allowed flex items-center gap-3 transition-colors">
-                                    <i class="fa-brands fa-apple text-slate-400 text-xl"></i>
+                                    <i class="fa-brands fa-apple text-slate-400 text-2xl"></i>
                                     <div class="flex flex-col text-left">
-                                        <span>iOS 下载</span>
-                                        <span class="text-xs font-normal">敬请期待</span>
+                                        <span class="font-bold text-base">iOS 下载</span>
+                                        <span class="text-xs font-normal mt-0.5">敬请期待</span>
                                     </div>
                                 </a>
                             </div>
@@ -1761,7 +1765,8 @@
                         立即开启您的家族数字传记
                     </p>
                     <div class="flex flex-col sm:flex-row justify-center gap-4 mt-6">
-                        <a href="https://median.co/share/lpzkblr#apk" target="_blank"
+                        <a href="https://gonativeio-apps.s3.us-east-1.amazonaws.com/static/69a7ae08763c97dd4a840dd0/app-release.apk?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Credential=AKIAYMYFO3A75OQPINCL%2F20260310%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20260310T085122Z&X-Amz-Expires=600&X-Amz-Signature=1fefb8724b431bda3eb90b7209896f7184cdaa4c0f418a917f5c527c8eb40a0c&X-Amz-SignedHeaders=host&versionId=7DgBws3MSmlp06N.YRU98lTm1vhWkfqC&x-amz-checksum-mode=ENABLED&x-id=GetObject"
+                            target="_blank"
                             class="px-8 py-3 bg-teal-600 text-white rounded-full font-bold hover:bg-teal-700 transition shadow-lg flex items-center justify-center gap-2 transform hover:scale-105 duration-200">
                             <i class="fa-brands fa-android text-xl"></i>
                             <span>下载 Android 版</span>
