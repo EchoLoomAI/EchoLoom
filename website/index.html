@@ -1,0 +1,2134 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>回声织造EchoLoom - AI数字传记专家</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <!-- Google Fonts (Mirrored for Speed) -->
+    <link rel="preconnect" href="https://fonts.font.im">
+    <link rel="preconnect" href="https://gstatic.font.im" crossorigin>
+    <link
+        href="https://fonts.font.im/css2?family=Ma+Shan+Zheng&family=Noto+Serif+SC:wght@200;300;400;500;700;900&family=Noto+Sans+SC:wght@300;400;500;700&display=swap"
+        rel="stylesheet">
+    <!-- FontAwesome (Domestic CDN) -->
+    <link rel="stylesheet" href="https://lf6-cdn-tos.bytecdntp.com/cdn/expire-1-M/font-awesome/6.0.0/css/all.min.css">
+
+    <style>
+        body {
+            font-family: 'Noto Sans SC', sans-serif;
+            background-color: #f8fafc;
+            color: #1e293b;
+            scroll-behavior: smooth;
+        }
+
+        .font-sans-ui {
+            font-family: 'Noto Sans SC', sans-serif;
+        }
+
+        /* Artistic Font Class for Prologue */
+        .font-artistic {
+            font-family: 'Ma Shan Zheng', cursive;
+        }
+
+        /* Chart Container Utilities */
+        .chart-container {
+            position: relative;
+            width: 100%;
+            height: 300px;
+            margin: 0 auto;
+        }
+
+        @media (min-width: 768px) {
+            .chart-container {
+                height: 350px;
+            }
+        }
+
+        /* Custom Styles for Nav and Prologue */
+        .navbar-transparent {
+            background: transparent;
+            border-bottom-color: transparent;
+            box-shadow: none;
+        }
+
+        .navbar-solid {
+            background: rgba(255, 255, 255, 0.95);
+            border-bottom-color: #e5e7eb;
+            box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+        }
+
+        .text-dark-theme {
+            color: #d1d5db;
+            /* Light gray for visibility on dark bg */
+        }
+
+        /* Animation for Prologue Text */
+        @keyframes revealText {
+            0% {
+                opacity: 0;
+                transform: translateY(20px);
+                filter: blur(5px);
+            }
+
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+                filter: blur(0);
+            }
+        }
+
+        .reveal-text {
+            opacity: 0;
+            animation: revealText 1.5s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
+        }
+
+        /* Star Field Background (Simple Pure CSS Animation) */
+        #star-field {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(ellipse at bottom, #1b2735 0%, #090a0f 100%);
+            overflow: hidden;
+            z-index: 0;
+        }
+
+        .star {
+            position: absolute;
+            background: white;
+            border-radius: 50%;
+            opacity: 0;
+            animation: twinkle 5s infinite;
+        }
+
+        @keyframes twinkle {
+
+            0%,
+            100% {
+                opacity: 0;
+                transform: scale(0.5);
+            }
+
+            50% {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        /* Card and Element Styles (Unchanged from previous context) */
+        .tech-card {
+            transition: all 0.3s ease;
+        }
+
+        .tech-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 30px -10px rgba(0, 0, 0, 0.1);
+        }
+
+        .hardware-card {
+            transition: all 0.3s ease;
+            border: 1px solid #e2e8f0;
+        }
+
+        .hardware-card:hover {
+            border-color: #0d9488;
+            box-shadow: 0 15px 35px rgba(13, 148, 136, 0.15);
+        }
+
+        .agent-card {
+            transition: all 0.3s ease;
+            border: 1px solid #e2e8f0;
+        }
+
+        .agent-card:hover {
+            border-color: #0d9488;
+            background-color: #f0fdfa;
+        }
+
+        .agent-details {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.5s ease-out;
+        }
+
+        .agent-card:hover .agent-details {
+            max-height: 500px;
+        }
+
+        .process-step {
+            position: relative;
+            padding-left: 2.5rem;
+            padding-bottom: 2.5rem;
+            border-left: 2px solid #e2e8f0;
+        }
+
+        .process-step:last-child {
+            border-left: none;
+            padding-bottom: 0;
+        }
+
+        .process-dot {
+            position: absolute;
+            left: -0.6rem;
+            top: 0;
+            width: 1.2rem;
+            height: 1.2rem;
+            border-radius: 50%;
+            background-color: #fff;
+            border: 4px solid #0d9488;
+            z-index: 10;
+        }
+
+        .data-asset-card {
+            background: linear-gradient(135deg, #ffffff 0%, #f0fdfa 100%);
+            border: 1px solid #ccfbf1;
+        }
+
+        .comp-row {
+            transition: background-color 0.2s;
+        }
+
+        .comp-row:hover {
+            background-color: #f8fafc;
+        }
+
+        .our-col {
+            background-color: #f0fdfa;
+            border-left: 2px solid #0d9488;
+            border-right: 2px solid #0d9488;
+        }
+
+        .our-col-header {
+            background-color: #0d9488;
+            color: white;
+            border-radius: 8px 8px 0 0;
+        }
+
+        .our-col-footer {
+            background-color: #f0fdfa;
+            border-radius: 0 0 8px 8px;
+            border-bottom: 2px solid #0d9488;
+        }
+
+        .pricing-card {
+            transition: transform 0.3s, box-shadow: 0.3s;
+        }
+
+        .pricing-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 25px 30px -5px rgba(0, 0, 0, 0.1);
+        }
+
+        .pricing-card.featured {
+            border: 2px solid #0d9488;
+            transform: scale(1.05);
+            z-index: 10;
+        }
+
+        .pricing-card.featured:hover {
+            transform: scale(1.05) translateY(-8px);
+        }
+
+        .arch-box {
+            background: white;
+            border: 1px solid #e2e8f0;
+            border-radius: 8px;
+            padding: 12px;
+            text-align: center;
+            font-size: 0.8rem;
+            color: #475569;
+            box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+        }
+
+        .arch-layer {
+            background: #f8fafc;
+            border: 1px dashed #cbd5e1;
+            border-radius: 12px;
+            padding: 16px;
+            margin-bottom: 16px;
+            position: relative;
+        }
+
+        .arch-label {
+            position: absolute;
+            top: -10px;
+            left: 16px;
+            background: #f8fafc;
+            padding: 0 8px;
+            font-size: 0.75rem;
+            font-weight: bold;
+            color: #64748b;
+        }
+
+        details>summary {
+            list-style: none;
+        }
+
+        details>summary::-webkit-details-marker {
+            display: none;
+        }
+
+        details[open] summary~* {
+            animation: fadeIn 0.3s ease-in-out;
+        }
+
+        details>summary .icon-plus {
+            transition: transform 0.2s;
+        }
+
+        details[open]>summary .icon-plus {
+            transform: rotate(45deg);
+        }
+
+        .survey-option {
+            transition: all 0.2s;
+            cursor: pointer;
+        }
+
+        .survey-option:hover {
+            border-color: #0d9488;
+            background-color: #f0fdfa;
+        }
+
+        .survey-option.selected {
+            border-color: #0d9488;
+            background-color: #ccfbf1;
+            color: #0f766e;
+            font-weight: bold;
+        }
+
+        .system-log {
+            font-family: 'Courier New', monospace;
+            font-size: 0.75rem;
+            line-height: 1.4;
+        }
+
+        .log-entry {
+            margin-bottom: 4px;
+            border-left: 2px solid transparent;
+            padding-left: 8px;
+        }
+
+        .log-entry.planner {
+            border-color: #a855f7;
+            color: #7e22ce;
+        }
+
+        .log-entry.perception {
+            border-color: #10b981;
+            color: #047857;
+        }
+
+        .log-entry.historian {
+            border-color: #3b82f6;
+            color: #1d4ed8;
+        }
+
+        .log-entry.writer {
+            border-color: #f59e0b;
+            color: #b45309;
+        }
+
+        @keyframes fadeInLog {
+            from {
+                opacity: 0;
+                transform: translateY(5px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .animate-log-entry {
+            animation: fadeInLog 0.5s ease-out forwards;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .fade-in-up {
+            animation: fadeIn 0.6s ease-out forwards;
+        }
+
+        .side-nav {
+            position: fixed;
+            right: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+            z-index: 50;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .nav-dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background-color: #cbd5e1;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .nav-dot.active {
+            background-color: #0d9488;
+            transform: scale(1.4);
+        }
+
+        .nav-dot:hover {
+            background-color: #64748b;
+        }
+
+        section {
+            scroll-margin-top: 100px;
+        }
+    </style>
+</head>
+
+<body class="antialiased">
+
+    <!-- Navbar (Fixed, Dynamic Style) -->
+    <nav id="navbar"
+        class="fixed top-0 w-full z-50 transition-all duration-500 navbar-transparent h-20 flex items-center">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
+            <div class="flex justify-between items-center">
+                <div class="flex items-center gap-2 cursor-pointer" onclick="scrollToSection('prologue')">
+                    <div id="nav-logo-bg"
+                        class="bg-teal-600/30 backdrop-blur-sm text-white p-2 rounded-lg font-bold text-lg transition-all duration-300">
+                        <i class="fa-solid fa-microphone-lines"></i>
+                    </div>
+                    <span id="nav-brand"
+                        class="text-xl font-bold tracking-tight text-white transition-colors duration-300">回声织造 <span
+                            class="text-teal-400 opacity-90">EchoLoom</span></span>
+                </div>
+                <div class="hidden xl:flex items-center space-x-8 text-sm font-medium text-white transition-colors duration-300"
+                    id="nav-links">
+                    <button onclick="scrollToSection('vision')"
+                        class="nav-link hover:text-teal-400 transition">愿景</button>
+                    <button onclick="scrollToSection('demo')"
+                        class="nav-link hover:text-teal-400 transition">演示</button>
+                    <button onclick="scrollToSection('case-study')"
+                        class="nav-link hover:text-teal-400 transition">案例</button>
+                    <button onclick="scrollToSection('tech')"
+                        class="nav-link hover:text-teal-400 transition">技术</button>
+                    <button onclick="scrollToSection('service-plans')"
+                        class="nav-link hover:text-teal-400 transition">服务</button>
+                    <button onclick="scrollToSection('qa')"
+                        class="nav-link hover:text-teal-400 transition">常见问题</button>
+
+                    <!-- Action Buttons -->
+                    <div class="flex items-center gap-4 pl-6 border-l border-white/20">
+                        <!-- Download Dropdown -->
+                        <div class="relative group">
+                            <button
+                                class="px-5 py-2 bg-teal-600 hover:bg-teal-700 text-white rounded-full transition-all duration-300 flex items-center gap-2 shadow-lg shadow-teal-900/20 font-bold">
+                                <i class="fa-solid fa-download"></i> 下载 App
+                            </button>
+                            <div
+                                class="absolute top-full right-0 mt-3 w-56 bg-white rounded-xl shadow-2xl border border-slate-100 overflow-hidden hidden group-hover:block transition-all transform origin-top-right z-50">
+                                <a href="https://median.co/share/lpzkblr#apk" target="_blank"
+                                    class="block px-5 py-4 text-sm text-slate-700 hover:bg-teal-50 hover:text-teal-700 flex items-center gap-3 transition-colors border-b border-slate-50">
+                                    <i class="fa-brands fa-android text-green-500 text-xl"></i>
+                                    <div class="flex flex-col text-left">
+                                        <span class="font-bold">Android 下载</span>
+                                        <span class="text-xs text-slate-400 font-normal">v1.0.2 (最新版)</span>
+                                    </div>
+                                </a>
+                                <a href="#" onclick="alert('iOS 版本正在审核中，敬请期待！'); return false;"
+                                    class="block px-5 py-4 text-sm text-slate-400 hover:bg-slate-50 cursor-not-allowed flex items-center gap-3 transition-colors">
+                                    <i class="fa-brands fa-apple text-slate-400 text-xl"></i>
+                                    <div class="flex flex-col text-left">
+                                        <span>iOS 下载</span>
+                                        <span class="text-xs font-normal">敬请期待</span>
+                                    </div>
+                                </a>
+                            </div>
+                        </div>
+
+                        <!-- Console Button -->
+                        <a href="https://hub.echoloom.cn" target="_blank"
+                            class="px-6 py-2 bg-white text-teal-900 hover:bg-slate-100 font-bold rounded-full transition-all duration-300 shadow-md flex items-center gap-2">
+                            <i class="fa-solid fa-gauge-high"></i> 控制台
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Side Navigation Dots -->
+    <div class="side-nav hidden lg:flex">
+        <div class="nav-dot active" onclick="scrollToSection('prologue')" title="序章"></div>
+        <div class="nav-dot" onclick="scrollToSection('vision')" title="愿景"></div>
+        <div class="nav-dot" onclick="scrollToSection('demo')" title="演示"></div>
+        <div class="nav-dot" onclick="scrollToSection('case-study')" title="案例"></div>
+        <div class="nav-dot" onclick="scrollToSection('tech')" title="技术"></div>
+        <div class="nav-dot" onclick="scrollToSection('workflow')" title="流程"></div>
+        <div class="nav-dot" onclick="scrollToSection('data')" title="数据"></div>
+        <div class="nav-dot" onclick="scrollToSection('evolution')" title="演进"></div>
+        <div class="nav-dot" onclick="scrollToSection('business')" title="商业"></div>
+        <div class="nav-dot" onclick="scrollToSection('competition')" title="竞对"></div>
+        <div class="nav-dot" onclick="scrollToSection('research')" title="调研"></div>
+        <div class="nav-dot" onclick="scrollToSection('success-stories')" title="案例"></div>
+        <div class="nav-dot" onclick="scrollToSection('service')" title="服务"></div>
+        <div class="nav-dot" onclick="scrollToSection('qa')" title="Q&A"></div>
+        <div class="nav-dot" onclick="scrollToSection('closing-statement')" title="结语"></div>
+    </div>
+
+    <!-- Main Content -->
+    <main>
+
+        <!-- PROLOGUE SECTION -->
+        <section id="prologue"
+            class="relative h-screen flex flex-col justify-center items-center bg-slate-950 overflow-hidden text-center px-4">
+            <!-- Star Field Background -->
+            <div id="star-field" class="absolute inset-0 bg-slate-950"></div>
+
+            <div class="relative z-10 max-w-5xl mx-auto space-y-12 md:space-y-16">
+                <!-- Line 1: Main Concept -->
+                <h2 class="text-4xl md:text-5xl font-bold text-teal-400 reveal-text font-artistic"
+                    style="animation-delay: 0.5s;">
+                    人有两次死亡
+                </h2>
+
+                <!-- Line 2: First Death -->
+                <h2 class="text-3xl md:text-4xl font-light text-slate-300 leading-relaxed reveal-text font-artistic"
+                    style="animation-delay: 2.5s;">
+                    第一次，是当我们咽下最后一口气，<br>
+                    <span class="text-slate-500 text-2xl md:text-3xl mt-2 block">肉体消逝于尘土</span>
+                </h2>
+
+                <!-- Line 3 (The Punchline): Second Death -->
+                <h2 class="text-4xl md:text-6xl font-bold text-transparent bg-clip-text bg-gradient-to-br from-teal-200 via-white to-slate-400 leading-tight md:leading-tight reveal-text drop-shadow-2xl font-artistic"
+                    style="animation-delay: 5.5s;">
+                    第二次，是世上不再有人<br>
+                    <span class="text-5xl md:text-7xl block">能叫出我们的名字</span>
+                </h2>
+
+                <!-- Transition CTA -->
+                <div class="pt-16 reveal-text" style="animation-delay: 8s;">
+                    <p class="text-xs text-slate-600 mb-6 tracking-[0.3em] uppercase font-sans-ui">Don't let them be
+                        forgotten</p>
+                    <button onclick="scrollToSection('vision')"
+                        class="group flex flex-col items-center gap-3 mx-auto text-teal-500 hover:text-teal-400 transition-colors duration-500">
+                        <span
+                            class="text-lg font-light tracking-wide border-b border-teal-900 pb-1 group-hover:border-teal-500 transition-all font-sans-ui">开启
+                            · 传家宝</span>
+                        <i
+                            class="fa-solid fa-chevron-down animate-bounce mt-2 text-xl opacity-70 group-hover:opacity-100"></i>
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Hero Section -->
+        <section id="vision" class="relative pt-32 pb-32 overflow-hidden">
+            <!-- Background Image with Overlay -->
+            <div class="absolute inset-0 z-0">
+                <img src="https://images.unsplash.com/photo-1576765608535-5f04d1e3f289?q=80&w=2832&auto=format&fit=crop"
+                    class="w-full h-full object-cover object-center opacity-80" alt="无数老人的笑脸">
+                <div class="absolute inset-0 bg-gradient-to-b from-white/95 via-white/70 to-[#f8fafc]"></div>
+            </div>
+
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-center w-full">
+                <div
+                    class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-teal-50 border border-teal-100 text-teal-700 text-sm font-semibold uppercase tracking-wide mb-8 backdrop-blur-sm bg-opacity-80">
+                    <span class="w-2 h-2 rounded-full bg-teal-500 animate-pulse"></span>
+                    专注银发精神经济
+                </div>
+                <h1 class="text-5xl md:text-7xl font-extrabold text-slate-900 tracking-tight mb-8">
+                    用 AI 留住<span
+                        class="text-transparent bg-clip-text bg-gradient-to-r from-teal-600 to-emerald-500">家族记忆</span><br>
+                    丰盈中国老人的精神世界
+                </h1>
+
+                <div
+                    class="max-w-6xl mx-auto text-xl md:text-2xl text-slate-600 leading-relaxed mb-12 text-center font-light">
+                    <p class="mb-3 md:whitespace-nowrap">不仅仅是聊天机器人，而是您的<strong>AI 专属数字传记专家</strong></p>
+                    <p class="md:whitespace-nowrap">我们要为 3 亿中国老人构建“精神新基建”，留住态度，抚慰心灵，传承智慧</p>
+                </div>
+
+                <div class="flex flex-col sm:flex-row justify-center gap-6">
+                    <button onclick="scrollToSection('demo')"
+                        class="px-10 py-4 bg-teal-600 text-white rounded-xl font-bold shadow-lg shadow-teal-200 hover:bg-teal-700 transition flex items-center justify-center gap-3 group text-lg">
+                        <i class="fa-solid fa-play group-hover:scale-110 transition"></i> 体验产品 Demo
+                    </button>
+                    <button onclick="scrollToSection('competition')"
+                        class="px-10 py-4 bg-white text-slate-700 border border-slate-200 rounded-xl font-bold hover:bg-slate-50 transition flex items-center justify-center gap-3 text-lg">
+                        <i class="fa-solid fa-bolt"></i> 为什么是我们
+                    </button>
+                </div>
+
+                <!-- Stats Grid -->
+                <div class="mt-24 grid grid-cols-1 md:grid-cols-3 gap-10 border-t border-slate-200/60 pt-12">
+                    <div class="text-center">
+                        <div class="text-5xl font-black text-slate-900 mb-2">3 亿+</div>
+                        <div class="text-base font-medium text-slate-500">中国老年人口 (潜在用户)</div>
+                    </div>
+                    <div class="text-center">
+                        <div class="text-5xl font-black text-slate-900 mb-2">¥1000 亿+</div>
+                        <div class="text-base font-medium text-slate-500">孝心礼物市场规模</div>
+                    </div>
+                    <div class="text-center">
+                        <div class="text-5xl font-black text-slate-900 mb-2">0 门槛</div>
+                        <div class="text-base font-medium text-slate-500">语音交互，像打电话一样简单</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section: Live Product Demo -->
+        <section id="demo" class="py-24 bg-slate-50">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
+                <div class="text-center mb-16">
+                    <div
+                        class="inline-flex items-center px-4 py-1.5 rounded-full text-xs font-bold bg-teal-100 text-teal-800 mb-6 animate-pulse tracking-wide">
+                        <span class="w-2 h-2 rounded-full bg-teal-600 mr-2"></span>
+                        Live Demo
+                    </div>
+                    <h2 class="text-4xl font-bold text-slate-900 mb-4">产品实时演示</h2>
+                    <p class="text-xl text-slate-600 max-w-3xl mx-auto font-light">
+                        从<strong>付费人（子女）配置</strong>到<strong>叙事者（老人）语音交互</strong>的完整闭环体验
+                    </p>
+                </div>
+
+                <!-- Demo Info Box -->
+                <div
+                    class="bg-white border-l-4 border-blue-500 p-6 mb-12 rounded-r-xl max-w-5xl mx-auto shadow-sm flex items-start gap-4">
+                    <div class="flex-shrink-0 mt-1">
+                        <i class="fa-solid fa-circle-info text-blue-500 text-xl"></i>
+                    </div>
+                    <div class="flex-1">
+                        <h3 class="text-base font-bold text-blue-800 mb-3">演示功能概览</h3>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-3 text-sm text-slate-600">
+                            <p><span class="font-bold text-blue-600">🎭 AI 记者角色扮演：</span> “小忆”具备专业口述历史学家的采访技巧，语气温暖。</p>
+                            <p><span class="font-bold text-blue-600">🗣️ 方言情感识别：</span> 实时分析老人的语速、停顿和情绪（演示中通过日志展示）。</p>
+                            <p><span class="font-bold text-blue-600">📚 RAG 历史增强：</span> 当老人提到年代事件时，AI 自动检索知识库进行深度追问。
+                            </p>
+                            <p><span class="font-bold text-blue-600">📝 三步极简审核：</span> 子女端可对生成的草稿进行快速修正和确认。</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Live App Container -->
+                <div
+                    class="bg-white rounded-3xl shadow-2xl overflow-hidden border border-slate-200 relative mx-auto max-w-6xl h-[700px] flex flex-col transform hover:scale-[1.005] transition-transform duration-500">
+                    <!-- Browser Header Simulation -->
+                    <div class="bg-slate-100 border-b border-slate-200 px-6 py-4 flex items-center gap-4 shrink-0">
+                        <div class="flex gap-2">
+                            <div class="w-3.5 h-3.5 rounded-full bg-red-400"></div>
+                            <div class="w-3.5 h-3.5 rounded-full bg-yellow-400"></div>
+                            <div class="w-3.5 h-3.5 rounded-full bg-green-400"></div>
+                        </div>
+                        <div
+                            class="flex-1 bg-white border border-slate-300 rounded-lg px-4 py-1.5 text-xs text-slate-500 font-mono text-center flex justify-between items-center shadow-inner">
+                            <span class="opacity-50"><i class="fa-solid fa-lock mr-2"></i>
+                                https://service-406217181846.us-west1.run.app</span>
+                            <a href="https://service-406217181846.us-west1.run.app" target="_blank"
+                                class="text-teal-600 hover:text-teal-800 hover:underline" title="在新窗口打开">
+                                <i class="fa-solid fa-external-link-alt"></i>
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- Iframe Embedding -->
+                    <div class="flex-1 bg-slate-50 relative">
+                        <iframe src="https://service-406217181846.us-west1.run.app" class="w-full h-full border-0"
+                            allow="microphone; camera; autoplay" title="Vocal Legacy Live Application"></iframe>
+                    </div>
+                </div>
+
+                <div class="mt-8 text-center">
+                    <p class="text-sm text-slate-500">
+                        <i class="fa-solid fa-info-circle mr-1"></i> 建议使用支持 Web Speech API 的浏览器（如 Chrome/Edge）体验语音功能。
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section: Case Study -->
+        <section id="case-study" class="py-24 bg-white border-t border-slate-100">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
+                <div class="text-center mb-20">
+                    <div
+                        class="inline-flex items-center px-4 py-1.5 rounded-full text-xs font-bold bg-orange-100 text-orange-800 mb-6 tracking-wide">
+                        <span class="w-2 h-2 rounded-full bg-orange-500 mr-2"></span>
+                        真实案例 Case Study
+                    </div>
+                    <h2 class="text-4xl font-extrabold text-slate-900 tracking-tight mb-4">不仅是记录，更是“抢救”与“升华”</h2>
+                    <p
+                        class="text-xl text-slate-500 max-w-5xl mx-auto font-light whitespace-nowrap overflow-hidden text-ellipsis">
+                        看看一段关于 1977 年恢复高考的碎片化回忆，如何被 AI 转化为感人至深的家族精神资产
+                    </p>
+                </div>
+
+                <!-- Fix: md:grid-cols-2 ensures side-by-side on medium screens and up -->
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-16 items-start">
+
+                    <!-- Left Column: Input (Modern Chat UI) -->
+                    <div class="relative group">
+                        <!-- Label -->
+                        <div class="flex items-center gap-3 mb-6">
+                            <span
+                                class="flex items-center justify-center w-8 h-8 rounded-full bg-teal-600 text-white font-bold text-sm shadow-md shadow-teal-200">1</span>
+                            <h3 class="text-xl font-bold text-slate-800">AI 深度访谈实录</h3>
+                        </div>
+
+                        <!-- Phone Frame -->
+                        <div
+                            class="bg-white rounded-[2rem] shadow-2xl border-8 border-slate-100 overflow-hidden relative">
+                            <!-- Header -->
+                            <div
+                                class="bg-slate-50 px-6 py-4 border-b border-slate-100 flex items-center justify-between">
+                                <div class="flex items-center gap-3">
+                                    <div
+                                        class="w-10 h-10 rounded-full bg-teal-100 flex items-center justify-center text-teal-600 text-lg">
+                                        <i class="fa-solid fa-robot"></i>
+                                    </div>
+                                    <div>
+                                        <div class="text-sm font-bold text-slate-800">小忆 (AI 记者)</div>
+                                        <div class="text-xs text-green-500 flex items-center gap-1">
+                                            <span class="w-1.5 h-1.5 rounded-full bg-green-500 animate-pulse"></span>
+                                            通话中 00:14:23
+                                        </div>
+                                    </div>
+                                </div>
+                                <i class="fa-solid fa-signal text-slate-300"></i>
+                            </div>
+
+                            <!-- Chat Content (Scrollable) -->
+                            <div class="p-6 space-y-6 bg-[#f8fafc] h-[600px] overflow-y-auto custom-scrollbar">
+                                <!-- Turn 1 -->
+                                <div class="flex gap-4 items-start">
+                                    <div
+                                        class="bg-white p-4 rounded-2xl rounded-tl-none shadow-sm text-sm text-slate-600 leading-relaxed border border-slate-100 max-w-[90%]">
+                                        王爷爷，您之前提到过 1977 年恢复高考。那天您是怎么知道这个消息的？
+                                    </div>
+                                </div>
+                                <div class="flex gap-4 flex-row-reverse items-start">
+                                    <div
+                                        class="bg-teal-600 p-4 rounded-2xl rounded-tr-none shadow-md text-sm text-white leading-relaxed max-w-[90%]">
+                                        哎呀，那天我在地里干活... 好像是十月份吧。大队部的广播突然响了。
+                                    </div>
+                                </div>
+
+                                <!-- System Thought 1 -->
+                                <div
+                                    class="mx-4 my-2 p-3 bg-slate-100 rounded-xl border border-slate-200 text-xs text-slate-500 space-y-1">
+                                    <div
+                                        class="flex items-center gap-2 font-bold text-slate-400 uppercase tracking-wider text-[10px] mb-1">
+                                        <i class="fa-solid fa-bolt"></i> AI CoT Analysis
+                                    </div>
+                                    <div><span class="font-bold text-blue-500">[RAG]</span> 锁定时间：1977年10月21日公布消息。</div>
+                                    <div><span class="font-bold text-blue-500">[Strategy]</span> 引导老人回忆具体场景，增强画面感。</div>
+                                </div>
+
+                                <!-- Turn 2 -->
+                                <div class="flex gap-4 items-start">
+                                    <div
+                                        class="bg-white p-4 rounded-2xl rounded-tl-none shadow-sm text-sm text-slate-600 leading-relaxed border border-slate-100 max-w-[90%]">
+                                        广播里是不是提到了“自愿报名”？那一刻您周围的人是什么反应？
+                                    </div>
+                                </div>
+                                <div class="flex gap-4 flex-row-reverse items-start">
+                                    <div
+                                        class="bg-teal-600 p-4 rounded-2xl rounded-tr-none shadow-md text-sm text-white leading-relaxed max-w-[90%]">
+                                        对对！大家都不敢信啊。我当时<strong>锄头一扔</strong>，拔腿就往知青点跑。心里就一个念头：我要读书，我要回城！
+                                    </div>
+                                </div>
+
+                                <!-- System Thought 2 -->
+                                <div
+                                    class="mx-4 my-2 p-3 bg-slate-100 rounded-xl border border-slate-200 text-xs text-slate-500 space-y-1">
+                                    <div
+                                        class="flex items-center gap-2 font-bold text-slate-400 uppercase tracking-wider text-[10px] mb-1">
+                                        <i class="fa-solid fa-heart-pulse"></i> AI CoT Analysis
+                                    </div>
+                                    <div><span class="font-bold text-purple-500">[Emotion]</span> High Arousal (激动/决心)。
+                                    </div>
+                                    <div><span class="font-bold text-purple-500">[Symbol]</span> 捕捉意象：“扔锄头” (告别旧生活)。
+                                    </div>
+                                </div>
+
+                                <!-- Turn 3 -->
+                                <div class="flex gap-4 items-start">
+                                    <div
+                                        class="bg-white p-4 rounded-2xl rounded-tl-none shadow-sm text-sm text-slate-600 leading-relaxed border border-slate-100 max-w-[90%]">
+                                        那个“扔锄头”的动作太生动了！当时复习资料很难找吧？您是怎么备考的？
+                                    </div>
+                                </div>
+                                <div class="flex gap-4 flex-row-reverse items-start">
+                                    <div
+                                        class="bg-teal-600 p-4 rounded-2xl rounded-tr-none shadow-md text-sm text-white leading-relaxed max-w-[90%]">
+                                        难啊！但我老伴...那时候还是对象，她偷偷<strong>把家里存的鸡蛋卖了</strong>，给我换了一套《数理化自学丛书》。
+                                    </div>
+                                </div>
+
+                                <!-- Turn 4 -->
+                                <div class="flex gap-4 items-start">
+                                    <div
+                                        class="bg-white p-4 rounded-2xl rounded-tl-none shadow-sm text-sm text-slate-600 leading-relaxed border border-slate-100 max-w-[90%]">
+                                        这份支持太珍贵了。那后来呢？收到录取通知书那天，是什么场景？
+                                    </div>
+                                </div>
+                                <div class="flex gap-4 flex-row-reverse items-start">
+                                    <div
+                                        class="bg-teal-600 p-4 rounded-2xl rounded-tr-none shadow-md text-sm text-white leading-relaxed max-w-[90%]">
+                                        记得是下大雪... 邮递员在村口喊我的名字。我手抖得连信封都撕不开，眼泪当时就下来了。
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Right Column: Output (Refined Book UI) -->
+                    <!-- Fix: md:mt-0 removes top margin when side-by-side -->
+                    <div class="relative group mt-8 md:mt-0">
+                        <!-- Label -->
+                        <div class="flex items-center gap-3 mb-6">
+                            <span
+                                class="flex items-center justify-center w-8 h-8 rounded-full bg-orange-500 text-white font-bold text-sm shadow-md shadow-orange-200">2</span>
+                            <h3 class="text-xl font-bold text-slate-800">生成的传记章节</h3>
+                        </div>
+
+                        <!-- Book Page -->
+                        <div
+                            class="bg-[#fffbf0] rounded-r-2xl rounded-l-md shadow-2xl border-l-4 border-l-orange-800/20 p-8 lg:p-12 relative h-[660px] overflow-y-auto custom-scrollbar transition-transform duration-300 hover:-translate-y-2">
+                            <!-- Paper Texture Overlay -->
+                            <div class="absolute inset-0 opacity-10 pointer-events-none"
+                                style="background-image: url('https://www.transparenttextures.com/patterns/cream-paper.png');">
+                            </div>
+
+                            <!-- Decoration -->
+                            <div class="absolute top-8 right-8 text-6xl font-serif text-orange-900/10">”</div>
+
+                            <!-- Content -->
+                            <div class="relative z-10">
+                                <div class="flex items-center justify-between mb-8 pb-4 border-b border-orange-900/10">
+                                    <span class="text-xs font-bold tracking-widest text-orange-900/40 uppercase">Chapter
+                                        03</span>
+                                    <span class="text-xs font-serif text-orange-900/40 italic">The Turning Point</span>
+                                </div>
+
+                                <h2 class="text-3xl font-serif font-bold text-slate-900 mb-8 leading-tight">
+                                    第三章：田野里的<br><span class="text-orange-700">广播声</span>
+                                </h2>
+
+                                <div class="space-y-6 text-slate-700 leading-loose font-serif text-justify text-[15px]">
+                                    <p>
+                                        1977 年 10 月的秋风，吹过了广袤的黑土地，也吹皱了王家明心里的池水。那天，大队部的广播里传来了一声惊雷——“恢复高考”。
+                                    </p>
+                                    <p>
+                                        那是一个改变命运的时刻。王家明清楚地记得，当听到“自愿报名”的字眼钻进耳朵时，他下意识地<span
+                                            class="bg-orange-100 text-orange-900 px-1 mx-0.5 rounded decoration-clone font-medium">扔掉了手中的锄头</span>。这个动作仿佛是一种无声的仪式，象征着他决意与面朝黄土的生活告别。他在田埂上狂奔，耳边只有风声和内心呐喊：“我要读书！”
+                                    </p>
+                                    <div
+                                        class="text-sm text-slate-500 bg-white/60 p-4 rounded-lg border-l-2 border-teal-500 not-italic">
+                                        <span class="text-xs font-bold text-teal-600 block mb-1">💡 历史注脚 (AI
+                                            自动补充)</span>
+                                        那一年，全国有 570 万考生走进了考场，但录取率仅为 4.7%。对于像王家明这样的大龄知青来说，这不仅仅是一场考试，更是一次迟来的公正。
+                                    </div>
+                                    <p>
+                                        通往大学的路并不平坦。在那个物资匮乏的年代，一套《数理化自学丛书》简直是无价之宝。而这份珍贵的礼物，来自他的爱人（当时的恋人）。她瞒着家人，<span
+                                            class="bg-orange-100 text-orange-900 px-1 mx-0.5 rounded decoration-clone font-medium">卖掉了积攒许久的一篮鸡蛋</span>，换回了这把开启未来的钥匙。
+                                    </p>
+                                    <p>
+                                        那个冬日的大雪，并未冷却他心头的热血。当邮递员在村口高喊他的名字时，王家明颤抖着双手接过信封。那一刻，泪水模糊了视线，也融化了漫长的严冬。
+                                    </p>
+                                </div>
+
+                                <div class="mt-12 flex items-center justify-between border-t border-orange-900/10 pt-6">
+                                    <div class="flex items-center gap-3">
+                                        <div
+                                            class="w-8 h-8 rounded-full bg-slate-200 overflow-hidden border border-white shadow-sm">
+                                            <svg class="w-full h-full text-slate-400 bg-slate-100" fill="currentColor"
+                                                viewBox="0 0 24 24">
+                                                <path
+                                                    d="M24 20.993V24H0v-2.996A14.977 14.977 0 0112.004 15c4.904 0 9.26 2.354 11.996 5.993zM16.002 8.999a4 4 0 11-8 0 4 4 0 018 0z" />
+                                            </svg>
+                                        </div>
+                                        <div class="text-[10px] text-slate-400 uppercase tracking-wide">
+                                            Oral History by<br><strong class="text-slate-600">Wang Jiaming</strong>
+                                        </div>
+                                    </div>
+                                    <div
+                                        class="flex items-center gap-2 text-xs text-teal-700 font-bold bg-white px-3 py-1.5 rounded-full border border-teal-100 shadow-sm">
+                                        <i class="fa-solid fa-check-circle text-teal-500"></i> 已由子女确认
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section: Agentic AI Architecture & Performance -->
+        <section id="tech" class="bg-slate-50 py-24">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
+                <div class="text-center mb-16">
+                    <h2 class="text-3xl font-bold text-slate-900 mb-4">核心技术优势：垂直领域的极致适配</h2>
+                    <p
+                        class="mt-4 text-lg text-slate-600 max-w-5xl mx-auto font-light whitespace-nowrap overflow-hidden text-ellipsis">
+                        通用模型解决不了老年人的特殊问题。我们构建了<strong>方言适配、情感计算、历史溯源</strong>三大技术壁垒
+                    </p>
+                </div>
+
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 mb-24">
+                    <!-- Architecture Diagram -->
+                    <div
+                        class="bg-white p-10 rounded-[2rem] shadow-lg border border-slate-100 hover:shadow-xl transition duration-300">
+                        <h3 class="text-xl font-bold text-slate-800 mb-8 flex items-center"><i
+                                class="fa-solid fa-sitemap text-teal-600 mr-3 text-2xl"></i> 系统架构全景图</h3>
+                        <div class="flex flex-col gap-6">
+                            <div class="arch-layer">
+                                <div class="arch-label">终端接入层</div>
+                                <div class="grid grid-cols-3 gap-3">
+                                    <div class="arch-box">电话网关 (SIP)</div>
+                                    <div class="arch-box">IoT 智能硬件</div>
+                                    <div class="arch-box">小程序/App</div>
+                                </div>
+                            </div>
+                            <div class="flex justify-center text-slate-300 text-xl"><i
+                                    class="fa-solid fa-arrow-down"></i></div>
+                            <div class="arch-layer border-teal-200 bg-teal-50/30">
+                                <div class="arch-label text-teal-600">AI 智能体核心 (Agentic Core)</div>
+                                <div class="grid grid-cols-2 gap-5">
+                                    <div class="arch-box border-teal-200 hover:border-teal-400 transition">
+                                        <strong class="text-teal-800 block mb-1">感知 Agent</strong>
+                                        方言ASR + 情感识别
+                                    </div>
+                                    <div class="arch-box border-teal-200 hover:border-teal-400 transition">
+                                        <strong class="text-teal-800 block mb-1">规划 Agent</strong>
+                                        对话策略 + 话题管理
+                                    </div>
+                                    <div class="arch-box border-teal-200 hover:border-teal-400 transition">
+                                        <strong class="text-teal-800 block mb-1">历史学家 Agent</strong>
+                                        RAG 检索 + 事实核查
+                                    </div>
+                                    <div class="arch-box border-teal-200 hover:border-teal-400 transition">
+                                        <strong class="text-teal-800 block mb-1">作家 Agent</strong>
+                                        非虚构写作 + TTS
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="flex justify-center text-slate-300 text-xl"><i
+                                    class="fa-solid fa-arrow-down"></i></div>
+                            <div class="arch-layer">
+                                <div class="arch-label">数据资产层</div>
+                                <div class="grid grid-cols-2 gap-3">
+                                    <div class="arch-box">私有方言语料库</div>
+                                    <div class="arch-box">中国近现代史图谱</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Performance Radar & Metrics (Recomposed for Symmetry & Depth) -->
+                    <div
+                        class="bg-white p-10 rounded-[2rem] shadow-lg border border-slate-100 flex flex-col justify-between hover:shadow-xl transition duration-300">
+                        <h3 class="text-xl font-bold text-slate-800 mb-8 flex items-center"><i
+                                class="fa-solid fa-chart-line text-teal-600 mr-3 text-2xl"></i> 核心性能指标对标</h3>
+
+                        <!-- Top: Key Metrics Grid (No Scroll) -->
+                        <div class="grid grid-cols-3 gap-4 mb-8">
+                            <div
+                                class="p-4 bg-teal-50 rounded-2xl border border-teal-100 hover:bg-teal-100 transition text-center">
+                                <div class="text-3xl font-black text-teal-700 mb-1">3%</div>
+                                <div class="text-xs font-bold text-teal-800">方言识别错误率</div>
+                                <div class="text-[10px] text-teal-600 mt-1 opacity-70">Vs 通用模型 25%</div>
+                            </div>
+                            <div
+                                class="p-4 bg-teal-50 rounded-2xl border border-teal-100 hover:bg-teal-100 transition text-center">
+                                <div class="text-3xl font-black text-teal-700 mb-1">&lt;1.5s</div>
+                                <div class="text-xs font-bold text-teal-800">平均语音延迟</div>
+                                <div class="text-[10px] text-teal-600 mt-1 opacity-70">自然对话体验</div>
+                            </div>
+                            <div
+                                class="p-4 bg-teal-50 rounded-2xl border border-teal-100 hover:bg-teal-100 transition text-center">
+                                <div class="text-3xl font-black text-teal-700 mb-1">96%</div>
+                                <div class="text-xs font-bold text-teal-800">意图理解准确率</div>
+                                <div class="text-[10px] text-teal-600 mt-1 opacity-70">针对老年模糊语义</div>
+                            </div>
+                        </div>
+
+                        <!-- Bottom: Two Charts Side-by-Side -->
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 h-full">
+                            <!-- Radar Chart -->
+                            <div class="relative flex flex-col justify-end">
+                                <h4 class="text-xs font-bold text-slate-400 text-center mb-2 uppercase tracking-wide">
+                                    综合能力维度</h4>
+                                <div class="chart-container" style="height: 250px;">
+                                    <canvas id="performanceChart"></canvas>
+                                </div>
+                            </div>
+                            <!-- Bar Chart -->
+                            <div class="relative flex flex-col justify-end">
+                                <h4 class="text-xs font-bold text-slate-400 text-center mb-2 uppercase tracking-wide">
+                                    长程记忆准确率 (50轮)</h4>
+                                <div class="chart-container" style="height: 250px;">
+                                    <canvas id="contextChart"></canvas>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-4 gap-6 mb-12">
+                    <!-- Agent 1: Perception -->
+                    <div class="agent-card bg-white p-6 rounded-xl shadow-sm cursor-pointer group relative">
+                        <div
+                            class="absolute -top-3 -right-3 bg-green-100 text-green-700 px-3 py-1 rounded-full text-xs font-bold shadow-sm">
+                            Input</div>
+                        <div class="flex items-center gap-3 mb-4">
+                            <div
+                                class="w-10 h-10 rounded-full bg-green-100 flex items-center justify-center text-green-600 text-lg">
+                                <i class="fa-solid fa-ear-listen"></i>
+                            </div>
+                            <h3 class="font-bold text-slate-800">感知智能体<br><span
+                                    class="text-xs text-slate-500 font-normal">Perception Agent</span></h3>
+                        </div>
+                        <p class="text-sm text-slate-600 mb-4">
+                            <strong>挑战：</strong>老人语速慢、喘息声大、方言口音重。<br><strong>方案：</strong>自适应 VAD + 混合方言声学模型。
+                        </p>
+                        <div
+                            class="agent-details bg-slate-50 rounded-lg p-3 mt-2 border border-slate-200 text-xs font-mono text-slate-600">
+                            <div class="mb-2"><span class="font-bold text-green-600">Deep Tech:</span><br>- Adaptive
+                                Pause Detection<br>- Multi-dialect Embedding</div>
+                        </div>
+                    </div>
+                    <!-- Agent 2: Planning -->
+                    <div
+                        class="agent-card bg-white p-6 rounded-xl shadow-sm cursor-pointer group relative border-teal-500 border-2">
+                        <div
+                            class="absolute -top-3 -right-3 bg-purple-100 text-purple-700 px-3 py-1 rounded-full text-xs font-bold shadow-sm">
+                            Core</div>
+                        <div class="flex items-center gap-3 mb-4">
+                            <div
+                                class="w-10 h-10 rounded-full bg-purple-100 flex items-center justify-center text-purple-600 text-lg">
+                                <i class="fa-solid fa-brain"></i>
+                            </div>
+                            <h3 class="font-bold text-slate-800">规划智能体<br><span
+                                    class="text-xs text-slate-500 font-normal">Planning Agent</span></h3>
+                        </div>
+                        <p class="text-sm text-slate-600 mb-4">
+                            <strong>挑战：</strong>老人思维跳跃、逻辑松散。<br><strong>方案：</strong>CoT 引导 + 长期记忆管理，动态调整话题深度。
+                        </p>
+                        <div
+                            class="agent-details bg-slate-50 rounded-lg p-3 mt-2 border border-slate-200 text-xs font-mono text-slate-600">
+                            <div class="mb-2"><span class="font-bold text-purple-600">Strategy:</span><br>-
+                                Emotion-driven Branching<br>- Topic Drift Correction</div>
+                        </div>
+                    </div>
+                    <!-- Agent 3: Historian -->
+                    <div class="agent-card bg-white p-6 rounded-xl shadow-sm cursor-pointer group relative">
+                        <div
+                            class="absolute -top-3 -right-3 bg-blue-100 text-blue-700 px-3 py-1 rounded-full text-xs font-bold shadow-sm">
+                            Tools</div>
+                        <div class="flex items-center gap-3 mb-4">
+                            <div
+                                class="w-10 h-10 rounded-full bg-blue-100 flex items-center justify-center text-blue-600 text-lg">
+                                <i class="fa-solid fa-book-atlas"></i>
+                            </div>
+                            <h3 class="font-bold text-slate-800">历史学家智能体<br><span
+                                    class="text-xs text-slate-500 font-normal">Historian Agent</span></h3>
+                        </div>
+                        <p class="text-sm text-slate-600 mb-4">
+                            <strong>挑战：</strong>记忆模糊、时间线错乱。<br><strong>方案：</strong>垂直领域 RAG，自动校验事实，补充背景。
+                        </p>
+                        <div
+                            class="agent-details bg-slate-50 rounded-lg p-3 mt-2 border border-slate-200 text-xs font-mono text-slate-600">
+                            <div class="mb-2"><span class="font-bold text-blue-600">Knowledge Base:</span><br>- Local
+                                Chronicles (地方志)<br>- Event Timeline</div>
+                        </div>
+                    </div>
+                    <!-- Agent 4: Writer -->
+                    <div class="agent-card bg-white p-6 rounded-xl shadow-sm cursor-pointer group relative">
+                        <div
+                            class="absolute -top-3 -right-3 bg-orange-100 text-orange-700 px-3 py-1 rounded-full text-xs font-bold shadow-sm">
+                            Action</div>
+                        <div class="flex items-center gap-3 mb-4">
+                            <div
+                                class="w-10 h-10 rounded-full bg-orange-100 flex items-center justify-center text-orange-600 text-lg">
+                                <i class="fa-solid fa-pen-nib"></i>
+                            </div>
+                            <h3 class="font-bold text-slate-800">作家/执行智能体<br><span
+                                    class="text-xs text-slate-500 font-normal">Writer Agent</span></h3>
+                        </div>
+                        <p class="text-sm text-slate-600 mb-4">
+                            <strong>挑战：</strong>口语转书面语、非虚构写作。<br><strong>方案：</strong>微调写作模型 + 高情商 TTS 语音合成。
+                        </p>
+                        <div
+                            class="agent-details bg-slate-50 rounded-lg p-3 mt-2 border border-slate-200 text-xs font-mono text-slate-600">
+                            <div class="mb-2"><span class="font-bold text-orange-600">Output:</span><br>- Biography
+                                Formatting<br>- Emotional TTS Synthesis</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Workflow Simulation Log -->
+                <div
+                    class="bg-slate-900 rounded-2xl p-8 shadow-2xl border border-slate-800 max-w-5xl mx-auto font-mono text-xs md:text-sm relative overflow-hidden">
+                    <div class="absolute top-0 right-0 p-4 opacity-10 text-6xl text-white pointer-events-none"><i
+                            class="fa-solid fa-terminal"></i></div>
+                    <div class="flex justify-between items-center mb-6 border-b border-slate-700 pb-4">
+                        <span class="text-teal-400 font-bold flex items-center"><i
+                                class="fa-solid fa-code-branch mr-3"></i>Agentic Workflow Simulation</span>
+                        <span class="text-slate-500 flex items-center gap-2"><span
+                                class="w-2 h-2 rounded-full bg-green-500 animate-pulse"></span> Live Trace</span>
+                    </div>
+                    <div class="space-y-4 h-56 overflow-y-auto pr-4 system-log custom-scrollbar"
+                        id="agent-workflow-log"></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section: Business Process Workflow -->
+        <section id="workflow" class="bg-white py-24">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
+                <div class="text-center mb-16">
+                    <h2 class="text-3xl font-bold text-slate-900 mb-4">业务全流程：从“数据输入”到“精神交付”</h2>
+                    <p class="mt-4 text-lg text-slate-600 max-w-3xl mx-auto font-light">
+                        极简的用户体验背后，是精密的服务流转体系
+                    </p>
+                </div>
+
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+                    <!-- Left: Detailed Flow Diagram -->
+                    <div class="relative pl-4">
+                        <div class="process-step">
+                            <div class="process-dot"></div>
+                            <h4 class="text-lg font-bold text-slate-900 mb-1">1. 基础画像构建 (Onboarding)</h4>
+                            <p class="text-sm text-slate-600 mb-2">子女通过小程序录入老人基本信息（籍贯、职业、重要年份）。</p>
+                            <div
+                                class="bg-slate-50 p-2 rounded border border-slate-100 text-xs text-slate-500 font-medium inline-block">
+                                <strong>Output:</strong> 初始访谈大纲、方言模型预加载。
+                            </div>
+                        </div>
+                        <div class="process-step">
+                            <div class="process-dot bg-teal-600 border-teal-600"></div>
+                            <h4 class="text-lg font-bold text-teal-700 mb-1">2. AI 主动陪伴与访谈 (Interaction)</h4>
+                            <p class="text-sm text-slate-600 mb-2">系统自动拨打/唤醒硬件。AI 记者“小忆”进行启发式提问，安抚情绪。</p>
+                            <div
+                                class="bg-teal-50 p-2 rounded border border-teal-100 text-xs text-teal-700 font-medium inline-block">
+                                <strong>Action:</strong> 暖场寒暄 -> 深度追问 -> 情感共鸣。
+                            </div>
+                        </div>
+                        <div class="process-step">
+                            <div class="process-dot"></div>
+                            <h4 class="text-lg font-bold text-slate-900 mb-1">3. 智能处理 (Processing)</h4>
+                            <p class="text-sm text-slate-600 mb-2">原始录音转写，去除口癖，RAG 补充历史背景，隐私脱敏。</p>
+                            <div
+                                class="bg-slate-50 p-2 rounded border border-slate-100 text-xs text-slate-500 font-medium inline-block">
+                                <strong>Tech:</strong> ASR 转录 -> 实体识别 (NER) -> 事实核查 -> 文学润色。
+                            </div>
+                        </div>
+                        <div class="process-step">
+                            <div class="process-dot"></div>
+                            <h4 class="text-lg font-bold text-slate-900 mb-1">4. 审核与多模态生成 (Generation)</h4>
+                            <p class="text-sm text-slate-600 mb-2">子女端推送图文草稿，三步快速确认。生成数字/实体交付物。</p>
+                        </div>
+                        <div class="process-step">
+                            <div class="process-dot bg-orange-500 border-orange-500"></div>
+                            <h4 class="text-lg font-bold text-orange-600 mb-1">5. 认知健康反馈 (Feedback Loop)</h4>
+                            <p class="text-sm text-slate-600 mb-2">长期监测语言逻辑与情绪变化，生成认知健康报告，反哺医疗建议。</p>
+                            <div
+                                class="bg-orange-50 p-2 rounded border border-orange-100 text-xs text-orange-700 font-medium inline-block">
+                                <strong>Value:</strong> 阿兹海默症早筛预警。
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Right: Visual Representation -->
+                    <div class="space-y-6">
+                        <div
+                            class="bg-white rounded-xl shadow-lg border border-slate-100 p-6 transform hover:scale-[1.02] transition duration-300">
+                            <div class="flex items-center gap-4 mb-4">
+                                <div
+                                    class="w-10 h-10 bg-teal-100 text-teal-600 rounded-lg flex items-center justify-center text-lg">
+                                    <i class="fa-solid fa-mobile-screen"></i>
+                                </div>
+                                <h3 class="font-bold text-slate-800">子女端 App 体验</h3>
+                            </div>
+                            <div class="space-y-3">
+                                <div
+                                    class="flex items-center justify-between text-sm bg-slate-50 p-3 rounded-lg border border-slate-100">
+                                    <span class="font-medium text-slate-700">待审核：第3章《知青岁月》</span>
+                                    <button
+                                        class="px-3 py-1 bg-teal-600 text-white text-xs font-bold rounded-full hover:bg-teal-700 transition shadow-sm">去确认</button>
+                                </div>
+                                <div
+                                    class="flex items-center justify-between text-sm bg-slate-50 p-3 rounded-lg border border-slate-100">
+                                    <span class="font-medium text-slate-700">老爸今日情绪：🌟 开心</span>
+                                    <span
+                                        class="text-xs text-slate-400 bg-white px-2 py-1 rounded border border-slate-200">AI
+                                        分析生成</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div
+                            class="bg-white rounded-xl shadow-lg border border-slate-100 p-6 transform hover:scale-[1.02] transition duration-300">
+                            <div class="flex items-center gap-4 mb-4">
+                                <div
+                                    class="w-10 h-10 bg-orange-100 text-orange-600 rounded-lg flex items-center justify-center text-lg">
+                                    <i class="fa-solid fa-book-open"></i>
+                                </div>
+                                <h3 class="font-bold text-slate-800">最终交付物：家族资产</h3>
+                            </div>
+                            <div class="grid grid-cols-2 gap-4">
+                                <div
+                                    class="bg-slate-50 p-4 rounded-lg text-center border border-slate-100 hover:border-orange-200 transition">
+                                    <div class="text-2xl mb-2">📖</div>
+                                    <div class="text-sm font-bold text-slate-800">精装回忆录</div>
+                                    <div class="text-[10px] text-slate-500 mt-1">实体书印刷</div>
+                                </div>
+                                <div
+                                    class="bg-slate-50 p-4 rounded-lg text-center border border-slate-100 hover:border-orange-200 transition">
+                                    <div class="text-2xl mb-2">🎬</div>
+                                    <div class="text-sm font-bold text-slate-800">数字纪录片</div>
+                                    <div class="text-[10px] text-slate-500 mt-1">AI 视频生成</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section: Data Accumulation -->
+        <section id="data" class="bg-slate-50 py-24">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
+                <div class="text-center mb-16">
+                    <h2 class="text-3xl font-bold text-slate-900 mb-4">核心壁垒：数据资产积累</h2>
+                    <p class="text-lg text-slate-500 max-w-3xl mx-auto font-light">
+                        随着用户增长，我们积累的不仅是故事，更是<strong>中国银发人群的认知与情感图谱</strong>
+                    </p>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                    <div
+                        class="data-asset-card p-8 rounded-2xl shadow-sm hover:shadow-lg transition duration-300 group">
+                        <div
+                            class="w-14 h-14 bg-teal-100 text-teal-600 rounded-xl flex items-center justify-center text-2xl mb-6 group-hover:scale-110 transition">
+                            <i class="fa-solid fa-database"></i>
+                        </div>
+                        <h3 class="text-lg font-bold text-slate-900 mb-3">1. 垂直方言语料库</h3>
+                        <p class="text-sm text-slate-600 leading-relaxed">
+                            包含百万小时级的高龄人群方言语音数据。这些带有停顿、喘息、口音的独特数据，是通用模型无法获取的训练宝藏。</p>
+                    </div>
+                    <div
+                        class="data-asset-card p-8 rounded-2xl shadow-sm hover:shadow-lg transition duration-300 group">
+                        <div
+                            class="w-14 h-14 bg-blue-100 text-blue-600 rounded-xl flex items-center justify-center text-2xl mb-6 group-hover:scale-110 transition">
+                            <i class="fa-solid fa-network-wired"></i>
+                        </div>
+                        <h3 class="text-lg font-bold text-slate-900 mb-3">2. 个人历史图谱</h3>
+                        <p class="text-sm text-slate-600 leading-relaxed">
+                            将千万老人的个人经历与宏大历史事件关联，构建出高分辨率的“民间口述史”图谱，具有极高的社会学与历史学价值。</p>
+                    </div>
+                    <div
+                        class="data-asset-card p-8 rounded-2xl shadow-sm hover:shadow-lg transition duration-300 group">
+                        <div
+                            class="w-14 h-14 bg-orange-100 text-orange-600 rounded-xl flex items-center justify-center text-2xl mb-6 group-hover:scale-110 transition">
+                            <i class="fa-solid fa-heart-pulse"></i>
+                        </div>
+                        <h3 class="text-lg font-bold text-slate-900 mb-3">3. 情感与认知标签</h3>
+                        <p class="text-sm text-slate-600 leading-relaxed">
+                            通过长期对话，积累用户的情绪波动、记忆力变化数据。这些数据是未来进行认知症（阿尔茨海默病）早筛的核心依据。</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section: Product Form Evolution -->
+        <section id="evolution" class="bg-white py-24">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
+                <div class="text-center mb-16">
+                    <h2 class="text-3xl font-bold text-slate-900 mb-4">产品形态演进：从 App 到 AIoT</h2>
+                    <p class="text-lg text-slate-500 max-w-3xl mx-auto font-light">
+                        前期利用手机低成本快速覆盖，后期通过专有智能硬件深度渗透居家场景
+                    </p>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 relative">
+                    <!-- Connecting Line (Desktop) -->
+                    <div class="hidden lg:block absolute top-12 left-0 w-full h-1 bg-slate-100 z-0"></div>
+
+                    <!-- Phase 1 -->
+                    <div
+                        class="hardware-card bg-white p-6 rounded-2xl relative z-10 shadow-lg hover:-translate-y-1 transition duration-300">
+                        <div
+                            class="w-12 h-12 bg-slate-900 text-white rounded-full flex items-center justify-center font-bold text-lg mb-6 shadow-lg mx-auto lg:mx-0 ring-4 ring-white">
+                            1</div>
+                        <div class="text-center lg:text-left">
+                            <div
+                                class="text-xs font-bold text-teal-600 uppercase tracking-wide mb-2 bg-teal-50 inline-block px-2 py-0.5 rounded">
+                                当前阶段 (MVP)</div>
+                            <h3 class="text-xl font-bold text-slate-900 mb-2">手机无感介入</h3>
+                            <p class="text-sm text-slate-500 mb-4">无需下载 App，通过电话网或微信小程序接入。</p>
+                            <ul class="text-xs text-slate-600 space-y-2 text-left bg-slate-50 p-3 rounded-lg">
+                                <li><i class="fa-solid fa-check text-green-500 mr-2"></i> 自动拨号采访</li>
+                                <li><i class="fa-solid fa-check text-green-500 mr-2"></i> 0 硬件成本</li>
+                                <li><i class="fa-solid fa-check text-green-500 mr-2"></i> 快速验证需求</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- Phase 2.1 -->
+                    <div
+                        class="hardware-card bg-white p-6 rounded-2xl relative z-10 shadow-lg hover:-translate-y-1 transition duration-300">
+                        <div
+                            class="w-12 h-12 bg-white border-2 border-teal-500 text-teal-600 rounded-full flex items-center justify-center font-bold text-lg mb-6 shadow-lg mx-auto lg:mx-0 ring-4 ring-white">
+                            2</div>
+                        <div class="text-center lg:text-left">
+                            <div class="text-xs font-bold text-orange-500 uppercase tracking-wide mb-2">智能硬件</div>
+                            <h3 class="text-xl font-bold text-slate-900 mb-2">复古智能收音机</h3>
+                            <p class="text-sm text-slate-500 mb-4">专为老人设计的物理交互终端，一键启动陪伴。</p>
+                            <div
+                                class="h-24 bg-slate-50 rounded-lg mb-4 flex items-center justify-center text-slate-300 text-4xl">
+                                <i class="fa-solid fa-radio"></i>
+                            </div>
+                            <ul class="text-xs text-slate-600 space-y-2 text-left">
+                                <li><i class="fa-solid fa-plus text-teal-500 mr-2"></i> 实体按键，怀旧手感</li>
+                                <li><i class="fa-solid fa-plus text-teal-500 mr-2"></i> 24h 待机，随时唤醒</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- Phase 2.2 -->
+                    <div
+                        class="hardware-card bg-white p-6 rounded-2xl relative z-10 shadow-lg hover:-translate-y-1 transition duration-300">
+                        <div
+                            class="w-12 h-12 bg-white border-2 border-teal-500 text-teal-600 rounded-full flex items-center justify-center font-bold text-lg mb-6 shadow-lg mx-auto lg:mx-0 ring-4 ring-white">
+                            3</div>
+                        <div class="text-center lg:text-left">
+                            <div class="text-xs font-bold text-orange-500 uppercase tracking-wide mb-2">视觉交互</div>
+                            <h3 class="text-xl font-bold text-slate-900 mb-2">AI 记忆相框</h3>
+                            <p class="text-sm text-slate-500 mb-4">老照片修复轮播，指哪讲哪，视觉辅助回忆。</p>
+                            <div
+                                class="h-24 bg-slate-50 rounded-lg mb-4 flex items-center justify-center text-slate-300 text-4xl">
+                                <i class="fa-solid fa-images"></i>
+                            </div>
+                            <ul class="text-xs text-slate-600 space-y-2 text-left">
+                                <li><i class="fa-solid fa-plus text-teal-500 mr-2"></i> 自动关联话题展示照片</li>
+                                <li><i class="fa-solid fa-plus text-teal-500 mr-2"></i> 远程子女传图</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- Phase 3 -->
+                    <div
+                        class="hardware-card bg-white p-6 rounded-2xl relative z-10 shadow-lg hover:-translate-y-1 transition duration-300">
+                        <div
+                            class="w-12 h-12 bg-white border-2 border-teal-500 text-teal-600 rounded-full flex items-center justify-center font-bold text-lg mb-6 shadow-lg mx-auto lg:mx-0 ring-4 ring-white">
+                            4</div>
+                        <div class="text-center lg:text-left">
+                            <div class="text-xs font-bold text-blue-500 uppercase tracking-wide mb-2">全屋智能</div>
+                            <h3 class="text-xl font-bold text-slate-900 mb-2">陪伴型音箱</h3>
+                            <p class="text-sm text-slate-500 mb-4">融入家庭环境，作为智能家居中枢，提供生活提醒与情感陪聊。</p>
+                            <div
+                                class="h-24 bg-slate-50 rounded-lg mb-4 flex items-center justify-center text-slate-300 text-4xl">
+                                <i class="fa-solid fa-microphone"></i>
+                            </div>
+                            <ul class="text-xs text-slate-600 space-y-2 text-left">
+                                <li><i class="fa-solid fa-plus text-teal-500 mr-2"></i> 紧急呼救与健康监测</li>
+                                <li><i class="fa-solid fa-plus text-teal-500 mr-2"></i> 多模态主动关怀</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section: Business Model & Pricing -->
+        <section id="business" class="bg-slate-50 py-24">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
+                <div class="text-center mb-16">
+                    <h2 class="text-3xl font-bold text-slate-900 mb-4">商业模式与定价策略</h2>
+                    <p class="mt-4 text-lg text-slate-600 max-w-3xl mx-auto font-light">
+                        订阅+硬件+数据资产的复合盈利模型
+                    </p>
+                </div>
+
+                <!-- Pricing Tables -->
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-16">
+                    <!-- Plan 1 -->
+                    <div class="pricing-card bg-white p-8 rounded-2xl shadow-sm border border-slate-200 flex flex-col">
+                        <h3 class="text-sm font-bold text-slate-400 uppercase tracking-widest mb-4">C端 · 孝心订阅</h3>
+                        <div class="text-4xl font-black text-slate-900 mb-2">¥999<span
+                                class="text-base font-normal text-slate-500">/年</span></div>
+                        <p class="text-sm text-slate-600 mb-6">适合希望通过数字化手段陪伴父母的家庭。</p>
+                        <ul class="space-y-3 mb-8 flex-1 text-sm text-slate-600">
+                            <li class="flex items-center"><i class="fa-solid fa-check text-green-500 mr-2"></i> 52次 AI
+                                深度访谈</li>
+                            <li class="flex items-center"><i class="fa-solid fa-check text-green-500 mr-2"></i> 专属云端记忆空间
+                            </li>
+                            <li class="flex items-center"><i class="fa-solid fa-check text-green-500 mr-2"></i> 季度电子书交付
+                            </li>
+                        </ul>
+                        <button
+                            class="w-full py-3 border border-slate-200 rounded-lg font-bold text-slate-700 hover:bg-slate-50 transition">选择方案</button>
+                    </div>
+
+                    <!-- Plan 2 (Featured) -->
+                    <div
+                        class="pricing-card featured bg-white p-8 rounded-2xl shadow-lg relative flex flex-col border-2 border-teal-500">
+                        <div
+                            class="absolute top-0 right-0 bg-teal-500 text-white text-xs font-bold px-3 py-1 rounded-bl-xl uppercase">
+                            Popular</div>
+                        <h3 class="text-sm font-bold text-teal-600 uppercase tracking-widest mb-4">C端 · 传家宝套餐</h3>
+                        <div class="text-4xl font-black text-slate-900 mb-2">¥1599<span
+                                class="text-base font-normal text-slate-500">/套</span></div>
+                        <p class="text-sm text-slate-600 mb-6">订阅服务 + 智能硬件，给父母最好的陪伴礼。</p>
+                        <ul class="space-y-3 mb-8 flex-1 text-sm text-slate-600">
+                            <li class="flex items-center font-bold text-teal-800"><i
+                                    class="fa-solid fa-check text-teal-500 mr-2"></i> 包含所有订阅权益</li>
+                            <li class="flex items-center"><i class="fa-solid fa-check text-teal-500 mr-2"></i>
+                                赠送“小忆”智能收音机</li>
+                            <li class="flex items-center"><i class="fa-solid fa-check text-teal-500 mr-2"></i>
+                                年终定制精装实体回忆录</li>
+                            <li class="flex items-center"><i class="fa-solid fa-check text-teal-500 mr-2"></i> 专属家庭客服
+                            </li>
+                        </ul>
+                        <button
+                            class="w-full py-3 bg-teal-600 text-white rounded-lg font-bold hover:bg-teal-700 transition shadow-lg">立即购买</button>
+                    </div>
+
+                    <!-- Plan 3 -->
+                    <div class="pricing-card bg-white p-8 rounded-2xl shadow-sm border border-slate-200 flex flex-col">
+                        <h3 class="text-sm font-bold text-slate-400 uppercase tracking-widest mb-4">B端 · 机构赋能</h3>
+                        <div class="text-4xl font-black text-slate-900 mb-2">¥500<span
+                                class="text-base font-normal text-slate-500">/床/年</span></div>
+                        <p class="text-sm text-slate-600 mb-6">为养老机构提供标准化的认知干预解决方案。</p>
+                        <ul class="space-y-3 mb-8 flex-1 text-sm text-slate-600">
+                            <li class="flex items-center"><i class="fa-solid fa-check text-green-500 mr-2"></i> 批量账号管理系统
+                            </li>
+                            <li class="flex items-center"><i class="fa-solid fa-check text-green-500 mr-2"></i>
+                                每月认知健康评估报告</li>
+                        </ul>
+                        <button
+                            class="w-full py-3 border border-slate-200 rounded-lg font-bold text-slate-700 hover:bg-slate-50 transition">联系销售</button>
+                    </div>
+                </div>
+
+                <!-- Financial Calculator -->
+                <div class="bg-slate-900 rounded-3xl p-8 lg:p-12 text-white shadow-2xl relative overflow-hidden">
+                    <div
+                        class="absolute top-0 right-0 w-64 h-64 bg-teal-500 rounded-full filter blur-[100px] opacity-20">
+                    </div>
+
+                    <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 relative z-10">
+                        <div>
+                            <h3 class="text-2xl font-bold mb-4">财务测算：单用户模型</h3>
+                            <p class="text-slate-400 mb-8 text-sm leading-relaxed">
+                                基于 C 端业务模型。健康的 LTV/CAC 比率保证了规模化扩张的可行性。
+                            </p>
+
+                            <div class="space-y-6">
+                                <div>
+                                    <div class="flex justify-between text-sm mb-2">
+                                        <label class="font-medium text-slate-300">首年客单价 (ARPU)</label>
+                                        <span class="font-bold text-teal-400" id="arpu-display">¥600</span>
+                                    </div>
+                                    <input type="range" id="arpu-slider" min="300" max="1500" value="600" step="50"
+                                        class="w-full h-2 bg-slate-700 rounded-lg appearance-none cursor-pointer">
+                                    <p class="text-xs text-slate-500 mt-2">含订阅费 + 30% 硬件/实体书转化率</p>
+                                </div>
+                                <div>
+                                    <div class="flex justify-between text-sm mb-2">
+                                        <label class="font-medium text-slate-300">获客成本 (CAC)</label>
+                                        <span class="font-bold text-orange-400" id="cac-display">¥150</span>
+                                    </div>
+                                    <input type="range" id="cac-slider" min="50" max="500" value="150" step="10"
+                                        class="w-full h-2 bg-slate-700 rounded-lg appearance-none cursor-pointer">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="flex flex-col justify-center space-y-6">
+                            <div class="grid grid-cols-2 gap-4">
+                                <div class="bg-slate-800 p-4 rounded-xl border border-slate-700 text-center">
+                                    <div class="text-xs text-slate-400 uppercase tracking-widest mb-1">单用户毛利</div>
+                                    <div class="text-3xl font-black text-white" id="profit-display">¥400</div>
+                                </div>
+                                <div class="bg-slate-800 p-4 rounded-xl border border-slate-700 text-center">
+                                    <div class="text-xs text-slate-400 uppercase tracking-widest mb-1">首年 ROI</div>
+                                    <div class="text-3xl font-black text-green-400" id="roi-display">266%</div>
+                                </div>
+                            </div>
+                            <div class="bg-slate-800/30 p-4 rounded-xl border border-slate-700/50">
+                                <h4 class="text-xs font-bold text-slate-300 uppercase tracking-wider mb-3">营收预测 (万元)
+                                </h4>
+                                <div class="chart-container" style="height: 150px;">
+                                    <canvas id="revenueChart"></canvas>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section: Competitive Analysis -->
+        <section id="competition" class="bg-white py-24">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
+                <div class="text-center mb-16">
+                    <h2 class="text-3xl font-bold text-slate-900 mb-4">竞对分析：为什么是我们？</h2>
+                    <p class="text-lg text-slate-600 max-w-3xl mx-auto font-light">
+                        避开通用大模型“红海”，深耕垂直数据“蓝海”
+                    </p>
+                </div>
+
+                <div class="overflow-hidden bg-white shadow-xl rounded-2xl border border-slate-200">
+                    <div class="grid grid-cols-4 min-w-[800px]">
+                        <!-- Header -->
+                        <div
+                            class="p-6 bg-slate-50 text-slate-500 font-bold border-b border-slate-100 flex items-end text-xs uppercase tracking-wider">
+                            维度</div>
+                        <div class="p-6 bg-slate-50 text-slate-800 font-bold border-b border-slate-100 text-center">
+                            <div class="text-2xl mb-2">✍️</div>
+                            传统代写服务
+                        </div>
+                        <div class="p-6 bg-slate-50 text-slate-800 font-bold border-b border-slate-100 text-center">
+                            <div class="text-2xl mb-2">🤖</div>
+                            通用大模型
+                        </div>
+                        <div class="p-6 our-col-header text-center relative overflow-hidden bg-teal-600 text-white">
+                            <div
+                                class="absolute top-0 right-0 bg-yellow-400 text-yellow-900 text-[10px] font-bold px-2 py-1 transform rotate-45 translate-x-3 translate-y-2 shadow-sm z-10">
+                                WINNER</div>
+                            <div class="text-3xl mb-2">💎</div>
+                            EchoLoom 传家宝
+                        </div>
+
+                        <!-- Row 1: Cost -->
+                        <div
+                            class="p-5 text-sm font-bold text-slate-600 border-b border-slate-100 flex items-center bg-slate-50/30">
+                            💰 成本与价格</div>
+                        <div class="p-5 text-sm text-slate-600 border-b border-slate-100 text-center bg-slate-50/50">
+                            <span class="text-red-500 font-bold text-base">极高</span><br>¥20,000+
+                        </div>
+                        <div class="p-5 text-sm text-slate-600 border-b border-slate-100 text-center">
+                            <span class="text-green-600 font-bold text-base">极低</span><br>免费/低订阅费
+                        </div>
+                        <div
+                            class="p-5 text-sm border-b border-slate-100 text-center our-col font-bold text-teal-800 bg-teal-50/50">
+                            <span class="text-green-600 text-base">低门槛</span><br>¥600-1000 (高性价比)
+                        </div>
+
+                        <!-- Row 2: Interaction -->
+                        <div
+                            class="p-5 text-sm font-bold text-slate-600 border-b border-slate-100 flex items-center bg-slate-50/30">
+                            👴 交互门槛</div>
+                        <div class="p-5 text-sm text-slate-600 border-b border-slate-100 text-center bg-slate-50/50">
+                            <span class="text-orange-500 font-bold">高</span><br>需当面/电话配合
+                        </div>
+                        <div class="p-5 text-sm text-slate-600 border-b border-slate-100 text-center">
+                            <span class="text-red-500 font-bold text-base">极高</span><br>需打字/提示词工程 (Prompting)
+                        </div>
+                        <div
+                            class="p-5 text-sm border-b border-slate-100 text-center our-col font-bold text-teal-800 bg-teal-50/50">
+                            <span class="text-green-600 text-base">零门槛</span><br>被动接听电话，方言对答
+                        </div>
+
+                        <!-- Row 3: Empathy -->
+                        <div
+                            class="p-5 text-sm font-bold text-slate-600 border-b border-slate-100 flex items-center bg-slate-50/30">
+                            ❤️ 情感深度</div>
+                        <div class="p-5 text-sm text-slate-600 border-b border-slate-100 text-center bg-slate-50/50">
+                            <span class="text-green-600 font-bold">高</span><br>真人共情，但依赖写手水平
+                        </div>
+                        <div class="p-5 text-sm text-slate-600 border-b border-slate-100 text-center">
+                            <span class="text-red-500 font-bold">低</span><br>机械感强，缺乏主动关怀
+                        </div>
+                        <div
+                            class="p-5 text-sm border-b border-slate-100 text-center our-col font-bold text-teal-800 bg-teal-50/50">
+                            <span class="text-green-600 text-base">极高</span><br>情感计算 + 引导
+                        </div>
+
+                        <!-- Row 4: Output -->
+                        <div
+                            class="p-5 text-sm font-bold text-slate-600 border-b border-slate-100 flex items-center bg-slate-50/30">
+                            📦 最终交付物</div>
+                        <div class="p-5 text-sm text-slate-600 border-b border-slate-100 text-center bg-slate-50/50">
+                            单一文字稿件
+                        </div>
+                        <div class="p-5 text-sm text-slate-600 border-b border-slate-100 text-center">
+                            碎片化对话记录
+                        </div>
+                        <div
+                            class="p-5 text-sm border-b border-slate-100 text-center our-col font-bold text-teal-800 bg-teal-50/50">
+                            多模态资产<br>(书+视频+报告)
+                        </div>
+
+                        <!-- Row 5: Moat -->
+                        <div class="p-5 text-sm font-bold text-slate-600 flex items-center bg-slate-50/30">🏰 核心壁垒</div>
+                        <div class="p-5 text-sm text-slate-600 text-center bg-slate-50/50">
+                            人力资源
+                        </div>
+                        <div class="p-5 text-sm text-slate-600 text-center">
+                            基础算力/数据
+                        </div>
+                        <div class="p-5 text-sm text-center our-col-footer font-bold text-teal-800 bg-teal-50/50">
+                            <span class="bg-teal-100 text-teal-800 px-2 py-1 rounded text-xs">独家</span> 方言情感数据 + 认知图谱
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section: Research & Success -->
+        <section id="research" class="bg-slate-50 border-t border-slate-200 py-24">
+            <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
+                <div class="text-center mb-12">
+                    <h2 class="text-3xl font-bold text-slate-900 mb-4">市场调研与用户验证</h2>
+                    <p class="text-lg text-slate-600">
+                        在产品开发前，我们通过广泛的问卷调查，深度验证了用户痛点与付费意愿
+                    </p>
+                </div>
+                <div id="survey-container"
+                    class="bg-white rounded-2xl shadow-xl overflow-hidden min-h-[500px] flex flex-col relative border border-slate-200">
+                    <!-- Content injected by JS -->
+                </div>
+            </div>
+        </section>
+
+        <!-- Section: Success Stories -->
+        <section id="success-stories" class="bg-white py-24">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
+                <div class="text-center mb-16">
+                    <h2 class="text-3xl font-bold text-slate-900 mb-4">客户成功案例</h2>
+                    <p class="text-lg text-slate-600">他们已经通过 EchoLoom 找回了珍贵的记忆与快乐</p>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <div class="bg-slate-50 p-8 rounded-2xl border border-slate-100 hover:shadow-lg transition">
+                        <div class="flex items-center gap-4 mb-4">
+                            <img src="https://images.unsplash.com/photo-1543807535-eceef0bc6599?auto=format&fit=crop&q=80&w=100&h=100"
+                                class="w-16 h-16 rounded-full object-cover" alt="User">
+                            <div>
+                                <h4 class="font-bold text-slate-900">张先生 (上海)</h4>
+                                <p class="text-sm text-teal-600">C端用户</p>
+                            </div>
+                        </div>
+                        <p class="text-slate-600 text-sm italic">“父亲患有轻微阿兹海默症，小忆让他重新找回了表达的欲望。”</p>
+                    </div>
+                    <div class="bg-slate-50 p-8 rounded-2xl border border-slate-100 hover:shadow-lg transition">
+                        <div class="flex items-center gap-4 mb-4">
+                            <div
+                                class="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center text-2xl text-blue-600">
+                                <i class="fa-solid fa-hospital"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-slate-900">阳光颐养中心</h4>
+                                <p class="text-sm text-teal-600">B端机构</p>
+                            </div>
+                        </div>
+                        <p class="text-slate-600 text-sm italic">“引入系统后，护工压力减轻，老人的情绪指标明显提升。”</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section: Service & QA -->
+        <section id="service" class="bg-slate-900 text-white py-24">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-start">
+                    <div>
+                        <h2 class="text-3xl font-bold mb-6">全流程服务保障</h2>
+                        <div class="space-y-8">
+                            <div class="flex gap-4">
+                                <div
+                                    class="w-8 h-8 bg-teal-600 rounded-full flex items-center justify-center text-sm font-bold">
+                                    1</div>
+                                <div>
+                                    <h4 class="font-bold">无忧接入</h4>
+                                    <p class="text-sm text-slate-400">小程序/API快速部署。</p>
+                                </div>
+                            </div>
+                            <div class="flex gap-4">
+                                <div
+                                    class="w-8 h-8 bg-teal-600 rounded-full flex items-center justify-center text-sm font-bold">
+                                    2</div>
+                                <div>
+                                    <h4 class="font-bold">情感售后</h4>
+                                    <p class="text-sm text-slate-400">危机干预与人工回访。</p>
+                                </div>
+                            </div>
+                            <div class="flex gap-4">
+                                <div
+                                    class="w-8 h-8 bg-teal-600 rounded-full flex items-center justify-center text-sm font-bold">
+                                    3</div>
+                                <div>
+                                    <h4 class="font-bold">隐私承诺</h4>
+                                    <p class="text-sm text-slate-400">数据所有权归用户。</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="bg-slate-800 p-8 rounded-2xl border border-slate-700">
+                        <h3 class="text-2xl font-bold mb-6">投资者问答 (Q&A)</h3>
+                        <div class="space-y-4">
+                            <details class="group">
+                                <summary
+                                    class="cursor-pointer font-bold flex justify-between text-slate-300 group-hover:text-white">
+                                    <span>市场刚需？</span><span>+</span>
+                                </summary>
+                                <p class="mt-2 text-sm text-slate-400 pl-4 border-l border-teal-500">
+                                    孝心经济驱动，老年大学火爆证明精神需求。</p>
+                            </details>
+                            <details class="group">
+                                <summary
+                                    class="cursor-pointer font-bold flex justify-between text-slate-300 group-hover:text-white">
+                                    <span>技术壁垒？</span><span>+</span>
+                                </summary>
+                                <p class="mt-2 text-sm text-slate-400 pl-4 border-l border-teal-500">方言数据 + 情感计算 +
+                                    历史RAG。</p>
+                            </details>
+                            <details class="group">
+                                <summary
+                                    class="cursor-pointer font-bold flex justify-between text-slate-300 group-hover:text-white">
+                                    <span>盈利预期？</span><span>+</span>
+                                </summary>
+                                <p class="mt-2 text-sm text-slate-400 pl-4 border-l border-teal-500">30个月盈亏平衡，LTV/CAC >
+                                    3。</p>
+                            </details>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Final Closing Statement Section (New, Artistic) -->
+        <section id="closing-statement"
+            class="relative h-screen flex flex-col justify-center items-center overflow-hidden text-center bg-slate-900">
+            <!-- Background Image: Subtle hope/light beam (Unsplash placeholder) -->
+            <div class="absolute inset-0 z-0 opacity-50"
+                style="background-image: url('https://placehold.co/1920x1080/0f172a/0d9488?text=HOPE'); background-size: cover; background-position: center;">
+                <div class="absolute inset-0 bg-slate-900 opacity-90"></div>
+                <div
+                    class="absolute bottom-0 left-0 right-0 h-1/2 bg-gradient-to-t from-slate-900 via-slate-900/80 to-transparent">
+                </div>
+            </div>
+
+            <div class="relative z-10 max-w-4xl mx-auto space-y-12">
+
+                <h2
+                    class="text-5xl md:text-6xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-teal-300 via-white to-teal-400 leading-tight font-artistic drop-shadow-lg">
+                    投资未来<br>也是投资我们自己的终局
+                </h2>
+
+                <!-- Updated Content -->
+                <p class="text-xl md:text-2xl text-slate-300 font-light leading-relaxed">
+                    我们所投资的，绝非冰冷的算法<br>
+                    这是对人性最深切的<span class="text-teal-400 font-semibold">温柔承诺</span><br>
+                    是为所有不朽的爱与智慧，铸造一座<span class="text-teal-400 font-semibold">数字的永恒家园</span>
+                </p>
+
+                <div class="space-y-3 pt-6 text-slate-400 font-sans-ui">
+                    <p class="text-sm font-medium tracking-widest uppercase mb-4">
+                        立即开启您的家族数字传记
+                    </p>
+                    <div class="flex flex-col sm:flex-row justify-center gap-4 mt-6">
+                        <a href="https://median.co/share/lpzkblr#apk" target="_blank"
+                            class="px-8 py-3 bg-teal-600 text-white rounded-full font-bold hover:bg-teal-700 transition shadow-lg flex items-center justify-center gap-2 transform hover:scale-105 duration-200">
+                            <i class="fa-brands fa-android text-xl"></i>
+                            <span>下载 Android 版</span>
+                        </a>
+                        <button onclick="alert('iOS 版本正在审核中，敬请期待！')"
+                            class="px-8 py-3 border border-slate-600 text-slate-300 rounded-full font-bold hover:bg-slate-800 hover:text-white transition flex items-center justify-center gap-2 transform hover:scale-105 duration-200">
+                            <i class="fa-brands fa-apple text-xl"></i>
+                            <span>iOS 预约</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+        <!-- Final Footer -->
+        <section id="footer" class="bg-white flex flex-col justify-center items-center text-center py-16 h-auto">
+            <div class="max-w-4xl mx-auto px-4">
+                <div class="text-sm text-slate-500">
+                    © 2026 回声织造EchoLoom. All Rights Reserved.
+                </div>
+                <div class="mt-2 flex justify-center space-x-4 text-sm text-slate-400">
+                    <a href="https://beian.miit.gov.cn/" target="_blank" class="hover:text-slate-600 transition">
+                        <span>ICP备案号：蜀ICP备2025177078号<span>
+                                <span>公安备案号：川公网安备51010502015541号<span>
+                    </a>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Scripts -->
+    <script>
+        // Scroll to specific section
+        function scrollToSection(id) {
+            const el = document.getElementById(id);
+            if (el) el.scrollIntoView({ behavior: 'smooth' });
+        }
+
+        // --- Star Field Generation Script ---
+        function createStar(container) {
+            const star = document.createElement('div');
+            star.className = 'star';
+            star.style.width = `${Math.random() * 3 + 1}px`;
+            star.style.height = star.style.width;
+            star.style.left = `${Math.random() * 100}%`;
+            star.style.top = `${Math.random() * 100}%`;
+            star.style.animationDuration = `${Math.random() * 5 + 3}s`; // 3s to 8s
+            star.style.animationDelay = `${Math.random() * -5}s`; // Start at various times
+            container.appendChild(star);
+        }
+
+        function initStarField() {
+            const starField = document.getElementById('star-field');
+            if (starField) {
+                const numStars = 100;
+                for (let i = 0; i < numStars; i++) {
+                    createStar(starField);
+                }
+            }
+        }
+
+
+        // --- 0. Initialize Everything when DOM is Ready ---
+        window.addEventListener('load', () => { // Safe init
+            initStarField(); // Initialize star background
+            initAgentAnimation();
+            initCharts();
+            initFinanceCalculator();
+            initSurvey();
+
+            // Highlight Active Dot
+            const sections = document.querySelectorAll('section');
+            const dots = document.querySelectorAll('.nav-dot');
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const id = entry.target.getAttribute('id');
+                        dots.forEach(dot => {
+                            dot.classList.remove('active');
+                            if (dot.getAttribute('onclick').includes(id)) {
+                                dot.classList.add('active');
+                            }
+                        });
+                    }
+                });
+            }, { threshold: 0.1 }); // More sensitive in scrolling mode
+
+            sections.forEach(section => observer.observe(section));
+
+            // Navbar behavior control (Color switch when leaving prologue)
+            const navbar = document.getElementById('navbar');
+            const prologue = document.getElementById('prologue');
+
+            const scrollObserver = new IntersectionObserver(([entry]) => {
+                const navBrand = document.getElementById('nav-brand');
+                const navLinks = document.getElementById('nav-links');
+                const navLogoBg = document.getElementById('nav-logo-bg');
+
+                if (entry.isIntersecting) {
+                    // In prologue (Dark Theme)
+                    navbar.classList.add('navbar-transparent');
+                    navbar.classList.remove('navbar-solid');
+                    navBrand.classList.add('text-white');
+                    navLinks.classList.add('text-white');
+                    navLinks.classList.remove('text-slate-600');
+                    navLogoBg.classList.add('bg-teal-600/30');
+                    navLogoBg.classList.remove('bg-teal-600');
+                } else {
+                    // Past prologue (Light Theme)
+                    navbar.classList.remove('navbar-transparent');
+                    navbar.classList.add('navbar-solid');
+                    navBrand.classList.remove('text-white');
+                    navBrand.classList.add('text-slate-800');
+                    navLinks.classList.remove('text-white');
+                    navLinks.classList.add('text-slate-600');
+                    navLogoBg.classList.remove('bg-teal-600/30');
+                    navLogoBg.classList.add('bg-teal-600');
+                }
+            }, { threshold: 0.99, rootMargin: '0px 0px -100px 0px' }); // Observe when prologue leaves view
+
+            if (prologue) scrollObserver.observe(prologue);
+        });
+
+        // --- 1. Agentic Workflow Simulation Logic (Robust) ---
+        function initAgentAnimation() {
+            const workflowLog = document.getElementById('agent-workflow-log');
+            if (!workflowLog) {
+                console.warn('Agent log container not found');
+                return;
+            }
+
+            const agentSteps = [
+                { agent: 'perception', text: 'Detected Voice Activity. Dialect="Sichuan-Mandarin". Emotion="Nostalgic(0.88)".', color: 'text-green-400' },
+                { agent: 'planner', text: 'Analyzed Input. Strategy="Deep Dive". Task->Historian: "Verify 1977 Gaokao context".', color: 'text-purple-400' },
+                { agent: 'historian', text: 'Tool Call: VectorDB.Query("1977 Gaokao"). Found: "Restored in Oct, 5.7M candidates".', color: 'text-blue-400' },
+                { agent: 'planner', text: 'Received Context. Formulating Response Strategy: "Validate emotion + Ask specific detail about Oct announcement".', color: 'text-purple-400' },
+                { agent: 'writer', text: 'Generating Response: "那一刻一定特别激动人心！那是改变命运的消息。您当时丢了锄头之后做了什么？"', color: 'text-orange-400' },
+                { agent: 'perception', text: 'Listening for user response...', color: 'text-green-400' }
+            ];
+
+            let agentStepIndex = 0;
+
+            function playStep() {
+                // Double check existence in async loop
+                const logContainer = document.getElementById('agent-workflow-log');
+                if (!logContainer) return;
+
+                if (agentStepIndex >= agentSteps.length) {
+                    setTimeout(() => {
+                        if (workflowLog) {
+                            workflowLog.innerHTML = '';
+                            agentStepIndex = 0;
+                            playStep();
+                        }
+                    }, 3000);
+                    return;
+                }
+
+                const step = agentSteps[agentStepIndex];
+                const div = document.createElement('div');
+                div.className = `log-entry ${step.agent} animate-log-entry`;
+                div.innerHTML = `<span class="font-bold ${step.color}">[${step.agent.toUpperCase()}]</span> ${step.text}`;
+                logContainer.appendChild(div);
+                logContainer.scrollTop = logContainer.scrollHeight;
+
+                agentStepIndex++;
+                setTimeout(playStep, 1200);
+            }
+
+            playStep();
+        }
+
+        // --- 2. Financial Calculator Logic (Encapsulated) ---
+        function initFinanceCalculator() {
+            const arpuSlider = document.getElementById('arpu-slider');
+            const cacSlider = document.getElementById('cac-slider');
+            const arpuDisplay = document.getElementById('arpu-display');
+            const cacDisplay = document.getElementById('cac-display');
+            const profitDisplay = document.getElementById('profit-display');
+            const roiDisplay = document.getElementById('roi-display');
+
+            function updateFinance() {
+                const arpu = parseInt(arpuSlider.value);
+                const cac = parseInt(cacSlider.value);
+                const cost = 50;
+
+                const profit = arpu - cac - cost;
+                const roi = Math.round(((arpu - cac - cost) / (cac + cost)) * 100);
+
+                arpuDisplay.textContent = `¥${arpu}`;
+                cacDisplay.textContent = `¥${cac}`;
+                profitDisplay.textContent = `¥${profit}`;
+                roiDisplay.textContent = `${roi}%`;
+
+                profitDisplay.className = profit > 0 ? "text-4xl font-black text-white tracking-tight" : "text-4xl font-black text-red-500 tracking-tight";
+                roiDisplay.className = roi > 0 ? "text-4xl font-black text-green-400 tracking-tight" : "text-4xl font-black text-red-500 tracking-tight";
+            }
+
+            if (arpuSlider && cacSlider) {
+                arpuSlider.addEventListener('input', updateFinance);
+                cacSlider.addEventListener('input', updateFinance);
+            }
+        }
+
+        // --- 3. Chart.js Initialization (Encapsulated) ---
+        function initCharts() {
+            if (typeof Chart === 'undefined') return;
+
+            const revenueCanvas = document.getElementById('revenueChart');
+            if (revenueCanvas) {
+                const ctx = revenueCanvas.getContext('2d');
+                const gradient = ctx.createLinearGradient(0, 0, 0, 180);
+                gradient.addColorStop(0, 'rgba(20, 184, 166, 0.5)');
+                gradient.addColorStop(1, 'rgba(20, 184, 166, 0.0)');
+
+                new Chart(ctx, {
+                    type: 'line',
+                    data: {
+                        labels: ['Year 1', 'Year 2', 'Year 3'],
+                        datasets: [{
+                            label: '营收 (万元)',
+                            data: [500, 6000, 30000],
+                            borderColor: '#14b8a6',
+                            backgroundColor: gradient,
+                            borderWidth: 2,
+                            pointBackgroundColor: '#fff',
+                            pointBorderColor: '#14b8a6',
+                            pointRadius: 4,
+                            fill: true,
+                            tension: 0.4
+                        }]
+                    },
+                    options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false } }, scales: { x: { display: false }, y: { display: true, grid: { color: 'rgba(255,255,255,0.1)' }, ticks: { color: '#94a3b8' } } } }
+                });
+            }
+
+            const perfCanvas = document.getElementById('performanceChart');
+            if (perfCanvas) {
+                const ctx = perfCanvas.getContext('2d');
+                new Chart(ctx, {
+                    type: 'radar',
+                    data: {
+                        labels: ['方言识别', '情感响应', '历史准确', '适老化', '对话深度', '隐私安全'],
+                        datasets: [{
+                            label: 'EchoLoom',
+                            data: [95, 92, 98, 95, 90, 99],
+                            borderColor: '#0d9488',
+                            backgroundColor: 'rgba(13, 148, 136, 0.2)',
+                            pointBackgroundColor: '#0d9488',
+                        }, {
+                            label: '通用模型',
+                            data: [60, 75, 70, 50, 75, 85],
+                            borderColor: '#94a3b8',
+                            backgroundColor: 'rgba(148, 163, 184, 0.2)',
+                            pointBackgroundColor: '#94a3b8',
+                            borderDash: [5, 5]
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        scales: { r: { ticks: { display: false }, pointLabels: { font: { size: 11, weight: 'bold' } } } },
+                        plugins: { legend: { position: 'bottom', labels: { usePointStyle: true, padding: 20 } } }
+                    }
+                });
+            }
+
+            const contextCanvas = document.getElementById('contextChart');
+            if (contextCanvas) {
+                const ctx = contextCanvas.getContext('2d');
+                new Chart(ctx, {
+                    type: 'bar',
+                    data: {
+                        labels: ['10轮', '20轮', '30轮', '50轮'],
+                        datasets: [{
+                            label: 'EchoLoom',
+                            data: [99, 98, 96, 95],
+                            backgroundColor: '#0d9488',
+                            borderRadius: 4
+                        }, {
+                            label: '通用模型',
+                            data: [95, 85, 60, 40],
+                            backgroundColor: '#cbd5e1',
+                            borderRadius: 4
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        plugins: { legend: { position: 'bottom', labels: { usePointStyle: true } } },
+                        scales: { y: { beginAtZero: true, max: 100, ticks: { callback: v => v + '%' } }, x: { grid: { display: false } } }
+                    }
+                });
+            }
+        }
+
+        // --- 4. Survey Logic (Encapsulated) ---
+        function initSurvey() {
+            const surveyContainer = document.getElementById('survey-container');
+            if (!surveyContainer) return;
+
+            let surveyState = { role: null, step: 'welcome', answers: {} };
+
+            const surveyConfig = {
+                child: {
+                    title: "子女端（付费决策者）",
+                    color: "bg-teal-600",
+                    questions: [
+                        { id: "c1", type: "radio", question: "您父母目前的居住状态？", options: ["同住", "异地独居", "同城独居", "养老院"] },
+                        { id: "c2", type: "radio", question: "您最担心失去关于父母的什么？", options: ["声音/口头禅", "家族奋斗史", "人生处世哲学"] },
+                        { id: "c3", type: "radio", question: "您愿意支付的年费范围？", options: ["500元以内", "500-1000元", "1000-2000元", "2000元以上"] }
+                    ]
+                },
+                elderly: {
+                    title: "长辈端（叙事者）",
+                    color: "bg-orange-500",
+                    questions: [
+                        { id: "e1", type: "radio", question: "您平时手机打字方便吗？", options: ["很熟练", "手写", "只发语音", "完全不会"] },
+                        { id: "e2", type: "radio", question: "愿意和机器人“小忆”聊天吗？", options: ["愿意试一试", "只跟真人聊", "看聊什么内容"] },
+                        { id: "e3", type: "radio", question: "平时讲方言还是普通话？", options: ["普通话", "家乡方言", "混着说"] }
+                    ]
+                }
+            };
+
+            function render() {
+                surveyContainer.innerHTML = '';
+                if (surveyState.step === 'welcome') {
+                    surveyContainer.innerHTML = `
+                        <div class="flex flex-col items-center justify-center h-full p-10 text-center animate-fade-in-up">
+                            <div class="w-16 h-16 bg-teal-100 rounded-full flex items-center justify-center text-teal-600 text-2xl mb-6"><i class="fa-solid fa-clipboard-question"></i></div>
+                            <h3 class="text-2xl font-bold text-slate-800 mb-3">我们需要您的声音</h3>
+                            <p class="text-slate-500 mb-8">请选择您的身份，帮助我们优化产品体验。</p>
+                            <div class="flex gap-4 w-full max-w-md">
+                                <button id="btn-child" class="flex-1 py-4 border rounded-xl hover:border-teal-500 hover:bg-teal-50 font-bold text-slate-700 transition">我是子女</button>
+                                <button id="btn-elderly" class="flex-1 py-4 border rounded-xl hover:border-orange-500 hover:bg-orange-50 font-bold text-slate-700 transition">我是长辈</button>
+                            </div>
+                        </div>`;
+                    document.getElementById('btn-child').onclick = () => { surveyState.role = 'child'; surveyState.step = 'questions'; render(); };
+                    document.getElementById('btn-elderly').onclick = () => { surveyState.role = 'elderly'; surveyState.step = 'questions'; render(); };
+                } else if (surveyState.step === 'questions') {
+                    const config = surveyConfig[surveyState.role];
+                    const questionsHtml = config.questions.map((q, idx) => `
+                        <div class="mb-6">
+                            <p class="font-bold text-slate-800 mb-3">${idx + 1}. ${q.question}</p>
+                            <div class="space-y-2">
+                                ${q.options.map(opt => `<div class="survey-opt p-3 border rounded-lg cursor-pointer hover:bg-slate-50 text-sm text-slate-600" data-qid="${q.id}" data-val="${opt}">${opt}</div>`).join('')}
+                            </div>
+                        </div>`).join('');
+
+                    surveyContainer.innerHTML = `
+                        <div class="flex flex-col h-full animate-fade-in-up">
+                            <div class="px-6 py-4 border-b border-slate-100 flex justify-between items-center ${config.color} text-white"><span class="font-bold">${config.title}</span><button id="btn-reset" class="text-xs opacity-80 hover:opacity-100">重置</button></div>
+                            <div class="p-6 flex-1 overflow-y-auto custom-scrollbar">${questionsHtml}</div>
+                            <div class="p-6 border-t border-slate-100 bg-slate-50 text-right"><button id="btn-submit" class="px-6 py-2 bg-slate-900 text-white rounded-lg font-bold hover:bg-slate-800 transition">提交反馈</button></div>
+                        </div>`;
+
+                    document.querySelectorAll('.survey-opt').forEach(el => {
+                        el.onclick = function () {
+                            const parent = this.parentNode;
+                            Array.from(parent.children).forEach(c => c.classList.remove('border-teal-500', 'bg-teal-50', 'text-teal-700', 'font-bold'));
+                            this.classList.add('border-teal-500', 'bg-teal-50', 'text-teal-700', 'font-bold');
+                            surveyState.answers[this.dataset.qid] = this.dataset.val;
+                        }
+                    });
+                    document.getElementById('btn-reset').onclick = () => { surveyState = { role: null, step: 'welcome', answers: {} }; render(); };
+                    document.getElementById('btn-submit').onclick = () => { surveyState.step = 'success'; render(); };
+                } else if (surveyState.step === 'success') {
+                    surveyContainer.innerHTML = `
+                        <div class="flex flex-col items-center justify-center h-full p-10 text-center animate-fade-in-up">
+                            <div class="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center text-green-600 text-3xl mb-6"><i class="fa-solid fa-check"></i></div>
+                            <h3 class="text-2xl font-bold text-slate-800 mb-2">感谢反馈！</h3>
+                            <button id="btn-reset-final" class="mt-4 text-sm text-slate-400 hover:text-slate-600 underline">返回重填</button>
+                        </div>`;
+                    document.getElementById('btn-reset-final').onclick = () => { surveyState = { role: null, step: 'welcome', answers: {} }; render(); };
+                }
+            }
+            render();
+        }
+    </script>
+</body>
+
+</html>
