@@ -41,5 +41,24 @@
 live-server website/
 ```
 
+## HTTPS 安全配置 (SSL)
+
+如果在 Chrome 中看到“不安全”的提示，说明您的域名尚未配置正确的 SSL 证书。请尝试以下方案：
+
+1.  **使用 Cloudflare (推荐)**:
+    - 将域名的 DNS 解析托管到 Cloudflare。
+    - 在 Cloudflare 后台开启 "SSL/TLS" 模式为 "Full" 或 "Flexible"。
+    - Cloudflare 会自动为您提供免费的 HTTPS 证书。
+
+2.  **Nginx + Let's Encrypt**:
+    - 如果您使用 Nginx 自建服务器，可以使用 `certbot` 申请免费证书：
+      ```bash
+      sudo apt install certbot python3-certbot-nginx
+      sudo certbot --nginx -d echoloom.cn
+      ```
+
+3.  **云厂商证书**:
+    - 如果托管在阿里云/腾讯云/AWS，可以在控制台申请免费的 SSL 证书，并绑定到负载均衡 (SLB) 或 CDN 上。
+
 ---
 Copyright © 2026 回声织造 EchoLoom. All Rights Reserved.
