@@ -15,10 +15,14 @@
     <link rel="preconnect" href="https://fonts.font.im">
     <link rel="preconnect" href="https://gstatic.font.im" crossorigin>
     <link
-        href="https://fonts.font.im/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&family=Ma+Shan+Zheng&family=Noto+Serif+SC:wght@200;300;400;500;700;900&family=Noto+Sans+SC:wght@300;400;500;700&display=swap"
+        href="https://fonts.font.im/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&family=Ma+Shan+Zheng&family=ZCOOL+XiaoWei&family=Noto+Serif+SC:wght@200;300;400;500;700;900&family=Noto+Sans+SC:wght@300;400;500;700&display=swap"
         rel="stylesheet">
-    <!-- FontAwesome (Domestic CDN) -->
-    <link rel="stylesheet" href="https://lf6-cdn-tos.bytecdntp.com/cdn/expire-1-M/font-awesome/6.0.0/css/all.min.css">
+    <!-- Google Fonts (Official for Zhi Mang Xing) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Zhi+Mang+Xing&display=swap" rel="stylesheet">
+    <!-- FontAwesome (CDNJS) -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 
     <style>
         body {
@@ -34,11 +38,16 @@
 
         /* Artistic Font Class for Prologue */
         .font-artistic {
-            font-family: 'Ma Shan Zheng', cursive;
+            font-family: 'Zhi Mang Xing', cursive;
         }
 
         .font-hero-title {
-            font-family: 'Noto Serif SC', 'Inter', 'Noto Sans SC', serif;
+            font-family: "Noto Sans SC", "Ma Shan Zheng", "Inter", sans-serif;
+        }
+
+        /* Global Heading Font Override */
+        h2 {
+            font-family: "Noto Sans SC", sans-serif;
         }
 
         /* Chart Container Utilities */
@@ -93,38 +102,14 @@
             animation: revealText 1.5s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
         }
 
-        /* Star Field Background (Simple Pure CSS Animation) */
-        #star-field {
+        /* Hero Canvas (Replaces Star Field) */
+        #hero-canvas {
             position: absolute;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background: radial-gradient(ellipse at bottom, #1b2735 0%, #090a0f 100%);
-            overflow: hidden;
             z-index: 0;
-        }
-
-        .star {
-            position: absolute;
-            background: white;
-            border-radius: 50%;
-            opacity: 0;
-            animation: twinkle 5s infinite;
-        }
-
-        @keyframes twinkle {
-
-            0%,
-            100% {
-                opacity: 0;
-                transform: scale(0.5);
-            }
-
-            50% {
-                opacity: 1;
-                transform: scale(1);
-            }
         }
 
         /* Card and Element Styles (Unchanged from previous context) */
@@ -508,20 +493,24 @@
         <!-- PROLOGUE SECTION -->
         <section id="prologue"
             class="relative h-screen flex flex-col justify-center items-center bg-slate-950 overflow-hidden text-center px-4">
-            <!-- Star Field Background -->
-            <div id="star-field" class="absolute inset-0 bg-slate-950"></div>
+            <!-- Hero Canvas Background (Tech & Silver) -->
+            <canvas id="hero-canvas" class="absolute inset-0 w-full h-full z-0 bg-slate-950"></canvas>
+            <!-- Overlay Gradient for Depth -->
+            <div
+                class="absolute inset-0 bg-gradient-to-b from-transparent via-slate-950/50 to-slate-950 z-0 pointer-events-none">
+            </div>
 
             <div class="relative z-10 max-w-5xl mx-auto space-y-12 md:space-y-16">
                 <!-- Line 1: Main Concept -->
-                <h2 class="text-4xl md:text-5xl font-bold text-teal-400 reveal-text font-artistic"
+                <h2 class="text-6xl md:text-7xl font-bold text-teal-400 reveal-text font-artistic"
                     style="animation-delay: 0.5s;">
                     让人生被好好珍藏
                 </h2>
 
-                <h2 class="text-3xl md:text-4xl font-light text-slate-300 leading-relaxed reveal-text font-artistic"
+                <h2 class="text-4xl md:text-6xl font-light text-slate-300 leading-relaxed reveal-text font-artistic"
                     style="animation-delay: 2.5s;">
                     每一次讲述，都是一条回声的丝线<br>
-                    <span class="text-slate-500 text-2xl md:text-3xl mt-2 block">被听见、被记录、被理解</span>
+                    <span class="text-slate-400 text-3xl md:text-4xl mt-4 block">被听见、被记录、被理解</span>
                 </h2>
 
                 <h2 class="text-4xl md:text-6xl font-bold text-transparent bg-clip-text bg-gradient-to-br from-teal-200 via-white to-slate-400 leading-tight md:leading-tight reveal-text drop-shadow-2xl font-hero-title"
@@ -532,14 +521,15 @@
 
                 <!-- Transition CTA -->
                 <div class="pt-16 reveal-text" style="animation-delay: 8s;">
-                    <p class="text-xs text-slate-600 mb-6 tracking-[0.3em] uppercase font-sans-ui">让每段故事，都被珍藏</p>
+                    <p class="text-lg text-teal-200/80 mb-8 tracking-[0.3em] uppercase font-sans-ui font-medium">
+                        让每段故事，都被珍藏</p>
                     <button onclick="scrollToSection('vision')"
                         class="group flex flex-col items-center gap-3 mx-auto text-teal-500 hover:text-teal-400 transition-colors duration-500">
                         <span
-                            class="text-lg font-light tracking-wide border-b border-teal-900 pb-1 group-hover:border-teal-500 transition-all font-sans-ui">开启
+                            class="text-2xl font-medium tracking-widest border-b-2 border-teal-800 pb-2 group-hover:border-teal-400 group-hover:text-teal-300 transition-all duration-300 font-sans-ui">开启
                             · 数字传记</span>
                         <i
-                            class="fa-solid fa-chevron-down animate-bounce mt-2 text-xl opacity-70 group-hover:opacity-100"></i>
+                            class="fa-solid fa-chevron-down animate-bounce mt-4 text-2xl opacity-70 group-hover:opacity-100"></i>
                     </button>
                 </div>
             </div>
@@ -1810,33 +1800,134 @@
             if (el) el.scrollIntoView({ behavior: 'smooth' });
         }
 
-        // --- Star Field Generation Script ---
-        function createStar(container) {
-            const star = document.createElement('div');
-            star.className = 'star';
-            star.style.width = `${Math.random() * 3 + 1}px`;
-            star.style.height = star.style.width;
-            star.style.left = `${Math.random() * 100}%`;
-            star.style.top = `${Math.random() * 100}%`;
-            star.style.animationDuration = `${Math.random() * 5 + 3}s`; // 3s to 8s
-            star.style.animationDelay = `${Math.random() * -5}s`; // Start at various times
-            container.appendChild(star);
-        }
+        // --- Hero Canvas Animation (Silver & Tech Network) ---
+        function initHeroCanvas() {
+            const canvas = document.getElementById('hero-canvas');
+            if (!canvas) return;
 
-        function initStarField() {
-            const starField = document.getElementById('star-field');
-            if (starField) {
-                const numStars = 100;
-                for (let i = 0; i < numStars; i++) {
-                    createStar(starField);
+            const ctx = canvas.getContext('2d');
+            let width, height;
+            let particles = [];
+
+            // Configuration: "Silver Economy" (White/Grey) + "Tech" (Teal)
+            const particleCount = 80;
+            const connectionDistance = 120;
+            const colors = [
+                'rgba(255, 255, 255, ', // Silver/White
+                'rgba(203, 213, 225, ', // Slate-300 (Silver Grey)
+                'rgba(45, 212, 191, ',  // Teal-400 (Tech)
+                'rgba(20, 184, 166, '   // Teal-500 (Deep Tech)
+            ];
+
+            function resize() {
+                width = canvas.width = canvas.offsetWidth;
+                height = canvas.height = canvas.offsetHeight;
+            }
+
+            class Particle {
+                constructor() {
+                    this.reset(true);
+                }
+
+                reset(initial = false) {
+                    this.x = Math.random() * width;
+                    this.y = Math.random() * height;
+                    this.vx = (Math.random() - 0.5) * 0.3; // Slow floating
+                    this.vy = (Math.random() - 0.5) * 0.3;
+                    this.size = Math.random() * 2 + 0.5;
+                    this.colorPrefix = colors[Math.floor(Math.random() * colors.length)];
+                    this.alpha = Math.random() * 0.5 + 0.3;
+                    this.fade = Math.random() * 0.01 + 0.005;
+                    this.fadingOut = Math.random() > 0.5;
+                }
+
+                update() {
+                    this.x += this.vx;
+                    this.y += this.vy;
+
+                    // Wrap around screen
+                    if (this.x < 0) this.x = width;
+                    if (this.x > width) this.x = 0;
+                    if (this.y < 0) this.y = height;
+                    if (this.y > height) this.y = 0;
+
+                    // Twinkle effect
+                    if (this.fadingOut) {
+                        this.alpha -= this.fade;
+                        if (this.alpha <= 0.1) {
+                            this.alpha = 0.1;
+                            this.fadingOut = false;
+                        }
+                    } else {
+                        this.alpha += this.fade;
+                        if (this.alpha >= 0.8) {
+                            this.alpha = 0.8;
+                            this.fadingOut = true;
+                        }
+                    }
+                }
+
+                draw() {
+                    ctx.beginPath();
+                    ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+                    ctx.fillStyle = this.colorPrefix + this.alpha + ')';
+                    ctx.fill();
                 }
             }
-        }
 
+            function initParticles() {
+                particles = [];
+                for (let i = 0; i < particleCount; i++) {
+                    particles.push(new Particle());
+                }
+            }
+
+            function animate() {
+                ctx.clearRect(0, 0, width, height);
+
+                // Update and draw particles
+                particles.forEach(p => {
+                    p.update();
+                    p.draw();
+                });
+
+                // Draw connections (The "Loom" effect)
+                ctx.lineWidth = 0.5;
+                for (let i = 0; i < particles.length; i++) {
+                    for (let j = i + 1; j < particles.length; j++) {
+                        const dx = particles[i].x - particles[j].x;
+                        const dy = particles[i].y - particles[j].y;
+                        const dist = Math.sqrt(dx * dx + dy * dy);
+
+                        if (dist < connectionDistance) {
+                            const opacity = 1 - (dist / connectionDistance);
+                            if (opacity > 0) {
+                                ctx.beginPath();
+                                ctx.strokeStyle = `rgba(45, 212, 191, ${opacity * 0.2})`; // Subtle Teal Lines
+                                ctx.moveTo(particles[i].x, particles[i].y);
+                                ctx.lineTo(particles[j].x, particles[j].y);
+                                ctx.stroke();
+                            }
+                        }
+                    }
+                }
+
+                requestAnimationFrame(animate);
+            }
+
+            window.addEventListener('resize', () => {
+                resize();
+                initParticles();
+            });
+
+            resize();
+            initParticles();
+            animate();
+        }
 
         // --- 0. Initialize Everything when DOM is Ready ---
         window.addEventListener('load', () => { // Safe init
-            initStarField(); // Initialize star background
+            initHeroCanvas(); // Initialize Canvas Background
             initAgentAnimation();
             initCharts();
             initFinanceCalculator();
